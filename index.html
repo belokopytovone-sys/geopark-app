@@ -149,7 +149,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             opacity: 0;
             animation: splashSponsorIn 1s ease 2.2s forwards;
             white-space: nowrap;
@@ -165,16 +165,11 @@
             text-transform: uppercase;
             font-weight: 500;
         }
-        .splash-sponsor-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .splash-sponsor-logo { width: 36px; height: 36px; flex-shrink: 0; }
-        .splash-sponsor-name {
-            font-size: 15px; font-weight: 700; letter-spacing: 2px;
-            background: linear-gradient(135deg, #818cf8 0%, #a5b4fc 50%, #8b5cf6 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        .splash-sponsor-logo {
+            width: 150px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
         }
 
         .phone-frame {
@@ -591,7 +586,6 @@
         .btn-gosuslugi:disabled { cursor: not-allowed; opacity: 0.7; }
         .btn-gosuslugi svg { width: 14px; height: 14px; fill: #4ade80; flex-shrink: 0; }
 
-        /* Спиннер загрузки */
         .btn-gosuslugi .spinner {
             display: none;
             width: 14px;
@@ -659,7 +653,6 @@
         }
         .payment-secure svg { width: 12px; height: 12px; fill: var(--text-addr); }
 
-        /* Success state */
         .payment-success {
             display: none;
             flex-direction: column;
@@ -771,20 +764,7 @@
         </div>
         <div class="splash-sponsor">
             <div class="splash-sponsor-text">Спонсировано компанией:</div>
-            <div class="splash-sponsor-brand">
-                <svg class="splash-sponsor-logo" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="sberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#6366f1"/>
-                            <stop offset="50%" stop-color="#8b5cf6"/>
-                            <stop offset="100%" stop-color="#a78bfa"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M 27 9 A 14 14 0 1 0 31 27" stroke="url(#sberGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
-                    <path d="M 14 21 L 19 26 L 28 15" stroke="url(#sberGrad)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span class="splash-sponsor-name">СБЕР БАНК</span>
-            </div>
+            <img class="splash-sponsor-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Sberbank_Logo_2020.svg" alt="СберБанк">
         </div>
     </div>
 
@@ -1046,7 +1026,6 @@
                     </div>
                 </div>
 
-                <!-- Success state -->
                 <div class="payment-success" id="paymentSuccess">
                     <div class="success-icon">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
@@ -1143,7 +1122,6 @@
             if (document.getElementById('chatView').classList.contains('visible')) {
                 renderChat();
             }
-            // Обновляем кнопку оплаты с учётом льготы
             updatePayButton();
         }
 
@@ -1154,7 +1132,7 @@
             theme: 'dark', language: 'ru',
             chatMessages: [],
             isPaid: false,
-            hasDiscount: false  // ← после подтверждения Госуслуг
+            hasDiscount: false
         };
 
         const FULL_PRICE = '299,99 ₽';
@@ -1169,10 +1147,10 @@
         }
 
         const languages = [
-            { code: 'ru', name: 'Русский', flag: '🇺' },
-            { code: 'en', name: 'English', flag: '🇧' },
-            { code: 'es', name: 'Español', flag: '🇪🇸' },
-            { code: 'zh', name: '中文', flag: '🇨🇳' },
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'en', name: 'English', flag: '🇬🇧' },
+            { code: 'es', name: 'Español', flag: '🇸' },
+            { code: 'zh', name: '中文', flag: '🇳' },
             { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
             { code: 'ar', name: 'العربية', flag: '🇸🇦' },
             { code: 'pt', name: 'Português', flag: '🇵🇹' },
@@ -1190,7 +1168,6 @@
             document.getElementById('cardNumber').value = '';
             document.getElementById('cardExpiry').value = '';
             document.getElementById('cardCvc').value = '';
-            // Сброс состояния льготы при новом открытии
             if (!state.hasDiscount) {
                 resetDiscountUI();
             }
@@ -1217,35 +1194,26 @@
             const btn = document.getElementById('btnGosuslugi');
             if (btn.classList.contains('loading') || state.hasDiscount) return;
 
-            // Запускаем анимацию загрузки
             btn.classList.add('loading');
             btn.disabled = true;
 
-            // Имитация запроса к Госуслугам (1.5 сек)
             setTimeout(() => {
                 btn.classList.remove('loading');
                 btn.disabled = false;
                 state.hasDiscount = true;
 
-                // Меняем текст кнопки на подтверждённый
                 const textEl = btn.querySelector('.btn-gosuslugi-text');
                 textEl.textContent = t('gosuslugiConfirmed');
 
-                // Обновляем цены
                 applyDiscount();
             }, 1500);
         }
 
         function applyDiscount() {
-            // Показываем старую цену зачёркнутой
             document.getElementById('oldPriceInline').style.display = 'inline';
             document.getElementById('oldDiscountPrice').style.display = 'inline';
-
-            // Меняем текущую цену
             document.getElementById('currentPrice').textContent = DISCOUNT_PRICE;
             document.getElementById('discountPrice').textContent = DISCOUNT_PRICE + '/мес';
-
-            // Обновляем кнопку оплаты
             updatePayButton();
         }
 
@@ -1279,18 +1247,9 @@
             const cardExpiry = document.getElementById('cardExpiry').value;
             const cardCvc = document.getElementById('cardCvc').value;
 
-            if (cardNumber.length < 16) {
-                alert('Введите корректный номер карты');
-                return;
-            }
-            if (cardExpiry.length < 5) {
-                alert('Введите срок действия карты');
-                return;
-            }
-            if (cardCvc.length < 3) {
-                alert('Введите CVC код (3 цифры)');
-                return;
-            }
+            if (cardNumber.length < 16) { alert('Введите корректный номер карты'); return; }
+            if (cardExpiry.length < 5) { alert('Введите срок действия карты'); return; }
+            if (cardCvc.length < 3) { alert('Введите CVC код (3 цифры)'); return; }
 
             const btn = document.getElementById('btnPay');
             btn.disabled = true;
@@ -1357,7 +1316,6 @@
             });
         }
 
-        // ===== CHAT =====
         function formatTime(timestamp) {
             const d = new Date(timestamp);
             return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
@@ -1453,7 +1411,6 @@
             }
         });
 
-        // ===== SEARCH =====
         function onSearchInput() {
             const input = document.getElementById('searchInput');
             const clearBtn = document.getElementById('searchClear');
@@ -1485,7 +1442,6 @@
             return escapeHtml(text.substring(0, i)) + '<span class="highlight">' + escapeHtml(text.substring(i, i + query.length)) + '</span>' + escapeHtml(text.substring(i + query.length));
         }
 
-        // ===== MODAL =====
         function openModal(editId) {
             state.editingPointId = editId || null;
             const modalTitle = document.getElementById('modalTitle');
@@ -1539,7 +1495,7 @@
             const map = {
                 ru: ['250 м', '500 м', '750 м', '1 км'], en: ['250 m', '500 m', '750 m', '1 km'],
                 es: ['250 m', '500 m', '750 m', '1 km'], zh: ['250米', '500米', '750米', '1公里'],
-                hi: ['250 मी', '500 मी', '750 मी', '1 किमी'], ar: ['٢٥٠ م', '٥٠٠ م', '٧٥٠ م', '١ كم'],
+                hi: ['250 मी', '500 मी', '750 मी', '1 किमी'], ar: ['٢٥٠ م', '٥٠٠ م', '٧٥٠ م', ' كم'],
                 pt: ['250 m', '500 m', '750 m', '1 km'], ja: ['250m', '500m', '750m', '1km'],
                 de: ['250 m', '500 m', '750 m', '1 km'], fr: ['250 m', '500 m', '750 m', '1 km']
             };
@@ -1725,7 +1681,6 @@
             document.getElementById('currentIndicator').classList.toggle('filled', state.selectedId === 'current');
         }
 
-        // ===== SCROLLBAR =====
         function updateScrollbar() {
             const list = document.getElementById('pointsList');
             const scrollbar = document.getElementById('customScrollbar');
@@ -1793,7 +1748,6 @@
             list.addEventListener('scroll', () => { if (!dragging) updateThumbPosition(); });
         })();
 
-        // ===== MAP =====
         function closeMapView() {
             const pv = document.getElementById('pointsView');
             const mc = document.getElementById('mapContainer');
@@ -1938,7 +1892,6 @@
         function zoomOut() { setScale(mapState.scale - 0.2); updateMapTransform(); }
         function resetMap() { calculateMinScale(); mapState.scale = mapState.minScale; mapState.x = 0; mapState.y = 0; updateMapTransform(); }
 
-        // ===== INIT =====
         renderLanguages();
         renderDistanceLabels();
         renderPoints();
