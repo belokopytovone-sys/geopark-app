@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoPark</title>
+    <title>ГеоПарк</title>
     <link href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.min.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -142,34 +142,20 @@
         @keyframes splashDotPulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
 
         .splash-sponsor {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            opacity: 0;
-            animation: splashSponsorIn 1s ease 2.2s forwards;
-            white-space: nowrap;
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 14px;
+            opacity: 0; animation: splashSponsorIn 1s ease 2.2s forwards; white-space: nowrap;
         }
         @keyframes splashSponsorIn {
             0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
             100% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
         .splash-sponsor-text {
-            font-size: 10px;
-            color: #4a4a6a;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 500;
+            font-size: 10px; color: #4a4a6a; letter-spacing: 2px;
+            text-transform: uppercase; font-weight: 500;
         }
         .splash-sponsor-logo {
-            width: 150px;
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+            width: 150px; height: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
         }
 
         .phone-frame {
@@ -184,15 +170,13 @@
             padding: 20px 24px 16px; background: var(--bg-header);
             border-bottom: 1px solid var(--border-header);
             display: flex; align-items: center; justify-content: space-between;
-            z-index: 10; flex-shrink: 0;
-            transition: background 0.4s ease, border-color 0.4s ease;
+            z-index: 10; flex-shrink: 0; transition: background 0.4s ease, border-color 0.4s ease;
         }
 
         .header-left { display: flex; align-items: center; gap: 10px; }
         .header-right { display: flex; align-items: center; gap: 8px; }
         .header-icon {
-            width: 32px; height: 32px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            width: 32px; height: 32px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
             border-radius: 8px; display: flex; align-items: center; justify-content: center;
         }
         .header-icon svg { width: 18px; height: 18px; fill: white; }
@@ -222,13 +206,13 @@
         }
         .points-view.hidden { opacity: 0; transform: scale(0.95); pointer-events: none; position: absolute; inset: 0; }
 
-        .settings-view, .chat-view {
+        .settings-view, .chat-view, .instruction-view {
             flex: 1; display: flex; flex-direction: column; min-height: 0;
             opacity: 0; transform: scale(0.95);
             pointer-events: none; position: absolute; inset: 0;
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        .settings-view.visible, .chat-view.visible { opacity: 1; transform: scale(1); pointer-events: all; }
+        .settings-view.visible, .chat-view.visible, .instruction-view.visible { opacity: 1; transform: scale(1); pointer-events: all; }
 
         .view-header { display: flex; align-items: center; gap: 12px; padding: 16px 16px 12px; flex-shrink: 0; }
         .btn-back {
@@ -273,6 +257,20 @@
         .theme-preview.dark { background: #0f0f1a; }
         .theme-preview.light { background: #f5f6fa; }
 
+        /* ===== INSTRUCTION ===== */
+        .instruction-content {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 24px; text-align: center; gap: 16px;
+        }
+        .instruction-icon {
+            width: 64px; height: 64px; background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.25); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .instruction-icon svg { width: 28px; height: 28px; fill: var(--accent-light); }
+        .instruction-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 240px; }
+
         /* ===== CHAT ===== */
         .chat-messages {
             flex: 1; overflow-y: auto; padding: 16px;
@@ -284,30 +282,22 @@
         .chat-messages::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 2px; }
 
         .chat-bubble {
-            max-width: 80%; padding: 10px 14px;
-            border-radius: 16px; font-size: 13px; line-height: 1.5;
-            word-wrap: break-word; animation: bubbleIn 0.3s ease;
+            max-width: 80%; padding: 10px 14px; border-radius: 16px;
+            font-size: 13px; line-height: 1.5; word-wrap: break-word; animation: bubbleIn 0.3s ease;
         }
         @keyframes bubbleIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         .chat-bubble.support {
-            align-self: flex-start;
-            background: var(--chat-support);
-            border: 1px solid var(--chat-border-support);
-            color: var(--text-secondary);
+            align-self: flex-start; background: var(--chat-support);
+            border: 1px solid var(--chat-border-support); color: var(--text-secondary);
             border-bottom-left-radius: 4px;
         }
-
         .chat-bubble.user {
-            align-self: flex-end;
-            background: var(--chat-user);
-            color: white;
-            border-bottom-right-radius: 4px;
+            align-self: flex-end; background: var(--chat-user);
+            color: white; border-bottom-right-radius: 4px;
         }
-
         .chat-bubble-time { font-size: 9px; opacity: 0.6; margin-top: 4px; display: block; }
         .chat-bubble.support .chat-bubble-time { color: var(--text-dim); }
-
         .chat-date-divider { text-align: center; font-size: 10px; color: var(--text-dim); padding: 8px 0; letter-spacing: 0.5px; }
 
         .chat-input-area {
@@ -315,12 +305,10 @@
             background: var(--bg-header); border-top: 1px solid var(--border-header);
             display: flex; gap: 8px; align-items: flex-end;
         }
-
         .chat-input {
-            flex: 1; padding: 10px 14px;
-            background: var(--bg-modal-input); border: 1px solid var(--border-modal-input);
-            border-radius: 18px; color: var(--text-primary);
-            font-size: 13px; font-family: 'Inter', sans-serif;
+            flex: 1; padding: 10px 14px; background: var(--bg-modal-input);
+            border: 1px solid var(--border-modal-input); border-radius: 18px;
+            color: var(--text-primary); font-size: 13px; font-family: 'Inter', sans-serif;
             outline: none; resize: none; max-height: 80px; min-height: 38px;
             line-height: 1.4; transition: border-color 0.2s ease;
         }
@@ -328,96 +316,228 @@
         .chat-input::placeholder { color: var(--text-placeholder); }
 
         .chat-send {
-            width: 38px; height: 38px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            border: none; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.2s ease; flex-shrink: 0;
-            opacity: 0.5; pointer-events: none;
+            width: 38px; height: 38px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; transition: all 0.2s ease;
+            flex-shrink: 0; opacity: 0.5; pointer-events: none;
         }
         .chat-send.active { opacity: 1; pointer-events: all; }
         .chat-send.active:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); }
         .chat-send:active { transform: scale(0.95); }
         .chat-send svg { width: 18px; height: 18px; fill: white; }
 
-        .search-bar { flex-shrink: 0; margin: 12px 16px 0; position: relative; }
-        .search-input {
-            width: 100%; padding: 12px 42px 12px 42px;
-            background: var(--bg-search); border: 1px solid var(--border-search);
-            border-radius: 12px; color: var(--text-primary);
-            font-size: 14px; font-family: 'Inter', sans-serif;
-            outline: none; transition: all 0.3s ease;
+        /* ===== CENTRAL PANEL ===== */
+        .central-panel {
+            flex: 1; display: flex; flex-direction: column;
+            padding: 12px 16px; gap: 14px; overflow-y: auto; min-height: 0;
+            scrollbar-width: thin; scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
         }
-        .search-input:focus { border-color: var(--border-search-focus); background: var(--bg-search-focus); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
-        .search-input::placeholder { color: var(--text-placeholder); }
+        .central-panel::-webkit-scrollbar { width: 4px; }
+        .central-panel::-webkit-scrollbar-track { background: transparent; }
+        .central-panel::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 2px; }
 
-        .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; pointer-events: none; }
-        .search-icon svg { width: 16px; height: 16px; fill: var(--text-addr); transition: fill 0.2s ease; }
-        .search-input:focus ~ .search-icon svg { fill: var(--accent-light); }
+        .panel-section { display: flex; flex-direction: column; gap: 6px; }
+        .panel-label {
+            font-size: 10px; font-weight: 700; color: var(--text-dim);
+            text-transform: uppercase; letter-spacing: 0.8px; padding: 0 4px;
+        }
 
-        .search-clear {
-            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-            width: 28px; height: 28px; background: rgba(99, 102, 241, 0.15);
-            border: none; border-radius: 8px;
+        .dimension-row {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 12px; background: var(--bg-point);
+            border: 1px solid var(--border-point); border-radius: 12px;
+        }
+        .dimension-row-label { font-size: 11px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+        .dimension-row-value { font-size: 13px; font-weight: 700; color: var(--accent-lighter); width: 52px; text-align: right; flex-shrink: 0; }
+        .dimension-slider-wrap { flex: 1; position: relative; }
+        .dimension-slider {
+            -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+            background: rgba(99, 102, 241, 0.2); border-radius: 2px; outline: none; cursor: pointer;
+        }
+        .dimension-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 18px; height: 18px;
+            border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: 3px solid var(--bg-phone); cursor: pointer;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4); transition: box-shadow 0.2s ease;
+        }
+        .dimension-slider::-webkit-slider-thumb:hover { box-shadow: 0 2px 12px rgba(99, 102, 241, 0.6); }
+        .dimension-slider::-moz-range-thumb {
+            width: 18px; height: 18px; border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: 3px solid var(--bg-phone); cursor: pointer;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .point-selector {
+            background: var(--bg-point); border: 1px solid var(--border-point);
+            border-radius: 12px; overflow: hidden;
+        }
+        .point-selector-trigger {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 14px; cursor: pointer; transition: background 0.2s ease; user-select: none;
+        }
+        .point-selector-trigger:hover { background: var(--bg-point-hover); }
+        .point-selector-trigger-icon {
+            width: 28px; height: 28px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; opacity: 0; pointer-events: none;
-            transition: all 0.2s ease; padding: 0;
+            background: rgba(99, 102, 241, 0.15); flex-shrink: 0;
         }
-        .search-clear.visible { opacity: 1; pointer-events: all; }
-        .search-clear:hover { background: rgba(99, 102, 241, 0.3); }
-        .search-clear svg { width: 14px; height: 14px; fill: var(--accent-light); }
+        .point-selector-trigger-icon svg { width: 14px; height: 14px; fill: var(--accent-light); }
+        .point-selector-trigger-text { flex: 1; min-width: 0; }
+        .point-selector-trigger-title {
+            font-size: 13px; font-weight: 600; color: var(--text-secondary);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .point-selector-trigger-sub {
+            font-size: 10px; color: var(--text-addr); margin-top: 1px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .point-selector-chevron { width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.25s ease; }
+        .point-selector-chevron svg { width: 16px; height: 16px; fill: var(--text-muted); }
+        .point-selector.open .point-selector-chevron { transform: rotate(180deg); }
 
-        .points-scroll-wrapper { flex: 1; position: relative; margin: 8px 0; overflow: hidden; min-height: 0; display: flex; }
-        .points-list { flex: 1; height: 100%; overflow-y: auto; padding: 4px 12px 4px 16px; scrollbar-width: none; -ms-overflow-style: none; }
-        .points-list::-webkit-scrollbar { display: none; }
+        .point-selector-dropdown {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease;
+            border-top: 1px solid transparent;
+        }
+        .point-selector.open .point-selector-dropdown {
+            max-height: 260px; border-top-color: var(--border-point);
+            overflow-y: auto; scrollbar-width: thin;
+            scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+        }
+        .point-selector-dropdown::-webkit-scrollbar { width: 4px; }
+        .point-selector-dropdown::-webkit-scrollbar-thumb { background: rgba(99, 102, 241, 0.3); border-radius: 2px; }
 
-        .custom-scrollbar { width: 6px; margin-right: 10px; background: var(--bg-scrollbar); border-radius: 3px; position: relative; flex-shrink: 0; opacity: 0; transition: opacity 0.3s ease; align-self: stretch; }
-        .custom-scrollbar.visible { opacity: 1; }
-        .custom-scrollbar-thumb { position: absolute; left: 0; right: 0; background: linear-gradient(180deg, #6366f1, #8b5cf6); border-radius: 3px; min-height: 24px; cursor: pointer; transition: background 0.2s ease; touch-action: none; }
-        .custom-scrollbar-thumb:hover { background: linear-gradient(180deg, #818cf8, #a78bfa); }
+        .dropdown-search-wrap {
+            padding: 8px 10px; position: sticky; top: 0;
+            background: var(--bg-point); z-index: 2;
+        }
+        .dropdown-search {
+            width: 100%; padding: 8px 12px 8px 32px;
+            background: var(--bg-search); border: 1px solid var(--border-search);
+            border-radius: 8px; color: var(--text-primary);
+            font-size: 12px; font-family: 'Inter', sans-serif; outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .dropdown-search:focus { border-color: var(--border-search-focus); }
+        .dropdown-search::placeholder { color: var(--text-placeholder); }
+        .dropdown-search-icon {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            width: 14px; height: 14px; pointer-events: none;
+        }
+        .dropdown-search-icon svg { width: 14px; height: 14px; fill: var(--text-addr); }
 
-        .item { padding: 12px 16px; margin-bottom: 8px; border-radius: 14px; display: flex; align-items: center; gap: 12px; transition: all 0.3s ease; }
-        .item.current-location { background: var(--bg-current); border: 1px solid var(--border-current); cursor: pointer; }
-        .item.current-location:hover { background: var(--bg-current-hover); }
-        .item.point-item { background: var(--bg-point); border: 1px solid var(--border-point); cursor: pointer; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .item.point-item:hover { background: var(--bg-point-hover); border-color: var(--border-point-hover); }
-        .item.point-item.selected { background: var(--bg-point-selected); border-color: var(--border-point-selected); }
+        .dropdown-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 14px; cursor: pointer; transition: background 0.15s ease;
+        }
+        .dropdown-item:hover { background: var(--bg-point-hover); }
+        .dropdown-item.active { background: var(--bg-point-selected); }
+        .dropdown-item-indicator {
+            width: 20px; height: 20px; border-radius: 50%;
+            border: 2px solid var(--accent); flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s ease;
+        }
+        .dropdown-item.active .dropdown-item-indicator { background: var(--accent); }
+        .dropdown-item.active .dropdown-item-indicator::after {
+            content: ''; width: 6px; height: 6px; background: white; border-radius: 50%;
+        }
+        .dropdown-item-info { flex: 1; min-width: 0; }
+        .dropdown-item-name {
+            font-size: 12px; font-weight: 600; color: var(--text-secondary);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .dropdown-item-addr {
+            font-size: 10px; color: var(--text-addr); margin-top: 1px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .dropdown-item-actions { display: flex; gap: 4px; flex-shrink: 0; }
+        .dropdown-btn-edit, .dropdown-btn-delete {
+            width: 26px; height: 26px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s ease; padding: 0; border: none;
+        }
+        .dropdown-btn-edit { background: var(--bg-btn-edit); border: 1px solid var(--border-btn-edit); }
+        .dropdown-btn-edit:hover { background: var(--bg-btn-edit-hover); border-color: var(--border-btn-edit-hover); }
+        .dropdown-btn-edit svg { width: 12px; height: 12px; fill: var(--accent-lighter); }
+        .dropdown-btn-delete { background: var(--bg-btn-delete); border: 1px solid var(--border-btn-delete); }
+        .dropdown-btn-delete:hover { background: var(--bg-btn-delete-hover); border-color: var(--border-btn-delete-hover); }
+        .dropdown-btn-delete svg { width: 13px; height: 13px; fill: var(--danger-light); }
 
-        .point-indicator { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s ease; position: relative; cursor: pointer; }
-        .point-indicator.circle-empty { border: 2.5px solid var(--accent); background: transparent; }
-        .point-indicator.circle-filled { border: 2.5px solid var(--accent); background: var(--accent); }
-        .point-indicator.circle-filled::after { content: ''; width: 10px; height: 10px; background: white; border-radius: 50%; }
-        .point-indicator.current-indicator { border: 2.5px solid var(--accent-purple); }
-        .point-indicator.current-indicator.filled { background: var(--accent-purple); }
-        .point-indicator.current-indicator.filled::after { content: ''; width: 10px; height: 10px; background: white; border-radius: 50%; }
+        .dropdown-add-btn {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px; margin: 6px 10px 10px;
+            background: var(--bg-add); border: 1px dashed var(--border-add);
+            border-radius: 8px; color: var(--accent-light);
+            font-size: 12px; font-weight: 600; font-family: 'Inter', sans-serif;
+            cursor: pointer; transition: all 0.2s ease;
+        }
+        .dropdown-add-btn:hover { background: var(--bg-add-hover); border-color: var(--border-add-hover); }
+        .dropdown-add-btn svg { width: 14px; height: 14px; fill: var(--accent-light); }
 
-        .item-info { flex: 1; min-width: 0; }
-        .item-name { font-size: 14px; font-weight: 600; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .item-addr { font-size: 11px; color: var(--text-addr); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .item-dist { font-size: 10px; color: var(--accent-purple); margin-top: 3px; font-weight: 500; }
-        .item-name .highlight { background: rgba(99, 102, 241, 0.3); color: var(--accent-lightest); border-radius: 2px; padding: 0 1px; }
+        .dropdown-empty { padding: 16px; text-align: center; font-size: 12px; color: var(--text-empty); }
 
-        .point-actions { display: flex; gap: 6px; flex-shrink: 0; }
-        .btn-edit, .btn-delete { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; padding: 0; border: none; font-family: 'Inter', sans-serif; }
-        .btn-edit { background: var(--bg-btn-edit); border: 1px solid var(--border-btn-edit); }
-        .btn-edit:hover { background: var(--bg-btn-edit-hover); border-color: var(--border-btn-edit-hover); transform: scale(1.05); }
-        .btn-edit:active { transform: scale(0.95); }
-        .btn-edit svg { width: 15px; height: 15px; fill: var(--accent-lighter); }
-        .btn-delete { background: var(--bg-btn-delete); border: 1px solid var(--border-btn-delete); }
-        .btn-delete:hover { background: var(--bg-btn-delete-hover); border-color: var(--border-btn-delete-hover); transform: scale(1.05); }
-        .btn-delete:active { transform: scale(0.95); }
-        .btn-delete svg { width: 16px; height: 16px; fill: var(--danger-light); }
+        .distance-selector-row { display: flex; gap: 6px; }
+        .distance-option {
+            flex: 1; padding: 8px 4px; text-align: center;
+            background: var(--bg-point); border: 1px solid var(--border-point);
+            border-radius: 8px; font-size: 11px; font-weight: 600;
+            color: var(--text-muted); cursor: pointer;
+            transition: all 0.2s ease; font-family: 'Inter', sans-serif;
+        }
+        .distance-option:hover { background: var(--bg-point-hover); }
+        .distance-option.active {
+            background: var(--bg-point-selected); border-color: var(--border-point-selected);
+            color: var(--accent-lighter);
+        }
 
-        .btn-add-point { flex-shrink: 0; margin: 0 16px 12px; padding: 14px; background: var(--bg-add); border: 1px dashed var(--border-add); border-radius: 14px; color: var(--accent-light); font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .btn-add-point:hover { background: var(--bg-add-hover); border-color: var(--border-add-hover); }
-        .btn-add-point svg { width: 16px; height: 16px; fill: var(--accent-light); }
+        .toggle-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 12px; background: var(--bg-point);
+            border: 1px solid var(--border-point); border-radius: 12px;
+        }
+        .toggle-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+        .toggle-switch {
+            width: 44px; height: 24px; border-radius: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            cursor: pointer; position: relative;
+            transition: background 0.25s ease, border-color 0.25s ease;
+            flex-shrink: 0;
+        }
+        .toggle-switch::after {
+            content: ''; position: absolute; top: 2px; left: 2px;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: var(--text-muted);
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .toggle-switch.active {
+            background: rgba(99, 102, 241, 0.35);
+            border-color: rgba(99, 102, 241, 0.6);
+        }
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
 
-        .map-container { position: absolute; inset: 0; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; overflow: hidden; }
+        /* ===== MAP (ОБНОВЛЕНО ПОД PNG) ===== */
+        .map-container { position: absolute; inset: 0; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; overflow: hidden; background: #0d1b2a; }
         .map-container.visible { opacity: 1; transform: scale(1); pointer-events: all; }
         .map-wrapper { width: 100%; height: 100%; cursor: grab; overflow: hidden; }
         .map-wrapper:active { cursor: grabbing; }
-        .map-wrapper svg { width: 100%; height: 100%; transform-origin: center center; transition: transform 0.1s ease-out; }
+        
+        /* Новый стиль для картинки */
+        .map-wrapper #mapImage {
+            width: 100%; height: 100%;
+            object-fit: cover; /* Картинка заполняет всё пространство */
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+            user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
 
         .map-controls { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 4px; opacity: 0; transition: opacity 0.4s ease 0.3s; }
         .map-controls.visible { opacity: 1; }
@@ -448,28 +568,17 @@
 
         /* ===== МОДАЛКА ОПЛАТЫ ===== */
         .payment-overlay {
-            position: absolute; inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 200;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
+            position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+            z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
         }
         .payment-overlay.visible { opacity: 1; pointer-events: all; }
 
         .payment-modal {
-            width: 320px;
-            max-height: 560px;
-            background: var(--bg-modal);
-            border: 1px solid var(--border-modal);
-            border-radius: 20px;
-            padding: 20px;
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+            width: 320px; max-height: 560px; background: var(--bg-modal);
+            border: 1px solid var(--border-modal); border-radius: 20px; padding: 20px;
+            transform: scale(0.9) translateY(20px); transition: transform 0.3s ease;
+            overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
         }
         .payment-modal::-webkit-scrollbar { width: 4px; }
         .payment-modal::-webkit-scrollbar-track { background: transparent; }
@@ -477,199 +586,90 @@
 
         .payment-overlay.visible .payment-modal { transform: scale(1) translateY(0); }
 
-        .payment-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 16px;
-        }
+        .payment-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
         .payment-title { font-size: 18px; font-weight: 700; color: var(--text-primary); }
         .payment-subtitle { font-size: 12px; color: var(--text-addr); margin-top: 2px; }
 
         .btn-close-payment {
-            width: 32px; height: 32px;
-            background: rgba(239, 68, 68, 0.12);
-            border: 1px solid rgba(239, 68, 68, 0.25);
-            border-radius: 8px;
+            width: 32px; height: 32px; background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: all 0.2s ease; padding: 0; flex-shrink: 0;
         }
         .btn-close-payment:hover { background: rgba(239, 68, 68, 0.25); border-color: rgba(239, 68, 68, 0.5); }
         .btn-close-payment svg { width: 16px; height: 16px; fill: var(--danger-light); }
 
-        .premium-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1));
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 14px;
+        .free-trial-banner {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.06));
+            border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px;
+            padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
         }
+        .free-trial-banner svg { width: 20px; height: 20px; fill: #4ade80; flex-shrink: 0; }
+        .free-trial-banner-text { font-size: 12px; color: #4ade80; font-weight: 600; line-height: 1.4; }
 
-        .premium-badge {
-            display: inline-block;
-            padding: 3px 10px;
+        .tariff-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .tariff-card {
+            background: var(--bg-settings-item); border: 2px solid transparent;
+            border-radius: 14px; padding: 14px; cursor: pointer;
+            transition: all 0.25s ease; position: relative;
+        }
+        .tariff-card:hover { background: var(--bg-settings-item-hover); }
+        .tariff-card.selected { border-color: rgba(99, 102, 241, 0.6); background: var(--bg-point-selected); }
+        .tariff-card.selected::after {
+            content: '✓'; position: absolute; top: 10px; right: 12px;
+            width: 20px; height: 20px; border-radius: 50%;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .premium-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-        .premium-price { font-size: 13px; color: var(--text-addr); }
-        .premium-price strong { color: var(--accent-lighter); font-size: 18px; font-weight: 700; transition: all 0.4s ease; }
-        .premium-price .old-price {
-            text-decoration: line-through;
-            color: var(--text-dim);
-            font-size: 13px;
-            margin-right: 6px;
-            font-weight: 500;
-        }
-
-        .premium-features {
-            display: flex; flex-direction: column; gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .premium-feature {
-            display: flex; align-items: center; gap: 10px;
-            font-size: 12px; color: var(--text-secondary);
-        }
-
-        .premium-feature-icon {
-            width: 24px; height: 24px;
-            background: rgba(99, 102, 241, 0.15);
-            border-radius: 6px;
+            color: white; font-size: 11px; font-weight: 700;
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
         }
-        .premium-feature-icon svg { width: 14px; height: 14px; fill: var(--accent-light); }
-
-        .discount-block {
-            background: rgba(34, 197, 94, 0.08);
-            border: 1px solid rgba(34, 197, 94, 0.25);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 14px;
+        .tariff-badge {
+            display: inline-block; padding: 2px 8px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white;
+            font-size: 9px; font-weight: 700; border-radius: 20px;
+            letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px;
         }
-
-        .discount-title { font-size: 12px; font-weight: 600; color: #4ade80; margin-bottom: 2px; }
-        .discount-subtitle { font-size: 11px; color: var(--text-addr); margin-bottom: 8px; line-height: 1.4; }
-        .discount-price { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
-        .discount-price strong { color: #4ade80; font-size: 15px; transition: all 0.4s ease; }
-        .discount-price .old-price {
-            text-decoration: line-through;
-            color: var(--text-dim);
-            font-size: 12px;
-            margin-right: 6px;
-            font-weight: 500;
-        }
-
-        .btn-gosuslugi {
-            width: 100%;
-            padding: 10px;
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            border-radius: 10px;
-            color: #4ade80;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            position: relative;
-            min-height: 36px;
-        }
-        .btn-gosuslugi:hover:not(.loading) { background: rgba(34, 197, 94, 0.25); }
-        .btn-gosuslugi:disabled { cursor: not-allowed; opacity: 0.7; }
-        .btn-gosuslugi svg { width: 14px; height: 14px; fill: #4ade80; flex-shrink: 0; }
-
-        .btn-gosuslugi .spinner {
-            display: none;
-            width: 14px;
-            height: 14px;
-            border: 2px solid rgba(74, 222, 128, 0.3);
-            border-top-color: #4ade80;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-            flex-shrink: 0;
-        }
-        .btn-gosuslugi.loading .spinner { display: block; }
-        .btn-gosuslugi.loading .btn-gosuslugi-icon { display: none; }
-        .btn-gosuslugi.loading .btn-gosuslugi-text { opacity: 0.7; }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .tariff-badge.year-badge { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .tariff-name { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+        .tariff-price { font-size: 13px; color: var(--text-addr); }
+        .tariff-price strong { color: var(--accent-lighter); font-size: 18px; font-weight: 700; }
+        .tariff-price .old-price { text-decoration: line-through; color: var(--text-dim); font-size: 13px; margin-right: 6px; font-weight: 500; }
+        .tariff-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
         .payment-form { margin-bottom: 14px; }
         .payment-form-title {
             font-size: 11px; font-weight: 600; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;
         }
-
         .card-input-row { display: flex; gap: 8px; margin-bottom: 8px; }
-
         .payment-input {
-            width: 100%;
-            padding: 11px 12px;
-            background: var(--bg-modal-input);
-            border: 1px solid var(--border-modal-input);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: border-color 0.2s ease;
-            letter-spacing: 0.5px;
+            width: 100%; padding: 11px 12px; background: var(--bg-modal-input);
+            border: 1px solid var(--border-modal-input); border-radius: 10px;
+            color: var(--text-primary); font-size: 13px; font-family: 'Inter', sans-serif;
+            outline: none; transition: border-color 0.2s ease; letter-spacing: 0.5px;
         }
         .payment-input:focus { border-color: var(--border-modal-input-focus); }
         .payment-input::placeholder { color: var(--text-placeholder); }
 
         .btn-pay {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white; border: none; border-radius: 12px; font-size: 14px;
+            font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
         }
         .btn-pay:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4); }
         .btn-pay:active { transform: translateY(0); }
         .btn-pay:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .payment-secure {
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            margin-top: 10px;
-            font-size: 10px; color: var(--text-addr);
-        }
+        .payment-secure { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; font-size: 10px; color: var(--text-addr); }
         .payment-secure svg { width: 12px; height: 12px; fill: var(--text-addr); }
 
-        .payment-success {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 20px;
-            text-align: center;
-        }
+        .payment-success { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 30px 20px; text-align: center; }
         .payment-success.visible { display: flex; }
 
         .success-icon {
-            width: 64px; height: 64px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 16px;
-            animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            width: 64px; height: 64px; background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         @keyframes successPop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         .success-icon svg { width: 32px; height: 32px; fill: white; }
@@ -678,16 +678,9 @@
         .success-subtitle { font-size: 13px; color: var(--text-addr); margin-bottom: 20px; }
 
         .btn-continue {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white; border: none; border-radius: 12px; font-size: 14px;
+            font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer;
             transition: all 0.3s ease;
         }
         .btn-continue:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4); }
@@ -704,19 +697,6 @@
         .modal-input::placeholder { color: var(--text-placeholder); }
         .char-count { font-size: 10px; color: var(--text-placeholder); text-align: right; margin-top: 4px; }
 
-        .distance-slider { position: relative; padding: 10px 0 30px; }
-        .distance-track { position: relative; height: 4px; background: rgba(99, 102, 241, 0.2); border-radius: 2px; margin: 0 10px; }
-        .distance-fill { position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 2px; transition: width 0.2s ease; }
-        .distance-thumb { position: absolute; top: 50%; width: 20px; height: 20px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: 3px solid var(--bg-phone); border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; transition: left 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4); z-index: 2; touch-action: none; }
-        .distance-thumb:hover { box-shadow: 0 2px 12px rgba(99, 102, 241, 0.6); }
-        .distance-dots { position: absolute; top: 0; left: 10px; right: 10px; height: 4px; display: flex; justify-content: space-between; align-items: center; }
-        .distance-dot { width: 8px; height: 8px; background: rgba(99, 102, 241, 0.3); border-radius: 50%; transition: background 0.2s ease; }
-        .distance-dot.active { background: #8b5cf6; }
-        .distance-labels { display: flex; justify-content: space-between; margin-top: 12px; padding: 0 2px; }
-        .distance-label { font-size: 10px; color: var(--text-addr); transition: color 0.2s ease; cursor: pointer; }
-        .distance-label.active { color: var(--accent-lighter); font-weight: 600; }
-        .distance-value { text-align: center; font-size: 20px; font-weight: 700; color: var(--accent-lighter); margin-bottom: 8px; }
-
         .modal-buttons { display: flex; gap: 10px; margin-top: 20px; }
         .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; border: none; }
         .btn-modal.cancel { background: rgba(99, 102, 241, 0.1); color: var(--accent-light); border: 1px solid rgba(99, 102, 241, 0.2); }
@@ -724,28 +704,6 @@
         .btn-modal.save { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
         .btn-modal.save:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
         .btn-modal.save:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        @keyframes carPulse { 0%, 100% { filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6)); } 50% { filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.9)); } }
-        @keyframes spotPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-        @keyframes arrowBounce { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(0, -4px); } }
-        .car-group { animation: carPulse 2s ease-in-out infinite; }
-        .nearest-highlight { animation: spotPulse 1.5s ease-in-out infinite; }
-        .arrow-indicator { animation: arrowBounce 1s ease-in-out infinite; }
-
-        .empty-state { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-empty); padding: 20px; text-align: center; }
-        .empty-state-icon { width: 48px; height: 48px; background: rgba(99, 102, 241, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-        .empty-state-icon svg { width: 22px; height: 22px; fill: var(--accent); opacity: 0.5; }
-        .empty-state p { font-size: 13px; line-height: 1.5; }
-
-        .no-results { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-empty); padding: 20px; text-align: center; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .no-results-icon { width: 48px; height: 48px; background: rgba(99, 102, 241, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-        .no-results-icon svg { width: 22px; height: 22px; fill: var(--text-empty); opacity: 0.6; }
-        .no-results p { font-size: 13px; line-height: 1.5; }
-        .no-results .search-term { color: var(--accent-light); font-weight: 600; }
-
-        @keyframes fadeOut { from { opacity: 1; transform: translateX(0); max-height: 80px; margin-bottom: 8px; } to { opacity: 0; transform: translateX(30px); max-height: 0; margin-bottom: 0; padding: 0; } }
-        .point-item.deleting { animation: fadeOut 0.3s ease forwards; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -774,9 +732,12 @@
                 <div class="header-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 </div>
-                <h1>GeoPark</h1>
+                <h1>ГеоПарк</h1>
             </div>
             <div class="header-right">
+                <button class="btn-header btn-instruction" onclick="openInstruction()" data-i18n-title="instruction" title="Инструкция">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </button>
                 <button class="btn-header btn-support" onclick="openChat()" data-i18n-title="support" title="Техподдержка">
                     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/></svg>
                 </button>
@@ -787,44 +748,100 @@
         </div>
 
         <div class="content">
+            <!-- ===== CENTRAL PANEL ===== -->
             <div class="points-view" id="pointsView">
-                <div class="search-bar">
-                    <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="search" oninput="onSearchInput()">
-                    <div class="search-icon">
-                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    </div>
-                    <button class="search-clear" id="searchClear" onclick="clearSearch()">
-                        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                    </button>
-                </div>
-
-                <div class="points-scroll-wrapper">
-                    <div class="points-list" id="pointsList">
-                        <div class="item current-location" id="currentLocation" onclick="selectCurrent()">
-                            <div class="point-indicator current-indicator filled" id="currentIndicator"></div>
-                            <div class="item-info">
-                                <div class="item-name" data-i18n="currentLocation">Текущее местоположение</div>
-                                <div class="item-addr" data-i18n="currentLocationDesc">Ваше текущее положение</div>
+                <div class="central-panel">
+                    <div class="panel-section">
+                        <div class="panel-label" data-i18n="carDimensions">Габариты автомобиля</div>
+                        <div class="dimension-row">
+                            <div class="dimension-row-label" data-i18n="width">Ширина</div>
+                            <div class="dimension-slider-wrap">
+                                <input type="range" class="dimension-slider" id="carWidth" min="0" max="13" value="4" oninput="updateCarDimensions()">
                             </div>
+                            <div class="dimension-row-value" id="carWidthValue">1.8 м</div>
                         </div>
-                        <div class="empty-state" id="emptyState">
-                            <div class="empty-state-icon">
-                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                        <div class="dimension-row">
+                            <div class="dimension-row-label" data-i18n="length">Длина</div>
+                            <div class="dimension-slider-wrap">
+                                <input type="range" class="dimension-slider" id="carLength" min="0" max="13" value="4" oninput="updateCarDimensions()">
                             </div>
-                            <p data-i18n-html="emptyState">Добавьте точки<br>для быстрого доступа</p>
+                            <div class="dimension-row-value" id="carLengthValue">4.0 м</div>
                         </div>
                     </div>
-                    <div class="custom-scrollbar" id="customScrollbar">
-                        <div class="custom-scrollbar-thumb" id="customScrollbarThumb"></div>
+
+                    <div class="panel-section">
+                        <div class="panel-label" data-i18n="selectPoint">Точка</div>
+                        <div class="point-selector" id="pointSelector">
+                            <div class="point-selector-trigger" id="pointSelectorTrigger" onclick="togglePointSelector(event)">
+                                <div class="point-selector-trigger-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                </div>
+                                <div class="point-selector-trigger-text">
+                                    <div class="point-selector-trigger-title" id="selectedPointTitle" data-i18n="currentLocation">Текущее местоположение</div>
+                                    <div class="point-selector-trigger-sub" id="selectedPointSub" data-i18n="currentLocationDesc">Ваше текущее положение</div>
+                                </div>
+                                <div class="point-selector-chevron">
+                                    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                </div>
+                            </div>
+                            <div class="point-selector-dropdown" id="pointSelectorDropdown">
+                                <div class="dropdown-search-wrap">
+                                    <div class="dropdown-search-icon">
+                                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                                    </div>
+                                    <input type="text" class="dropdown-search" id="dropdownSearch" placeholder="Поиск" oninput="filterDropdownPoints()">
+                                </div>
+                                <div id="dropdownCurrentItem" class="dropdown-item" onclick="selectPoint('current')">
+                                    <div class="dropdown-item-indicator"></div>
+                                    <div class="dropdown-item-info">
+                                        <div class="dropdown-item-name" data-i18n="currentLocation">Текущее местоположение</div>
+                                        <div class="dropdown-item-addr" data-i18n="currentLocationDesc">Ваше текущее положение</div>
+                                    </div>
+                                </div>
+                                <div id="dropdownPointsList"></div>
+                                <div class="dropdown-empty" id="dropdownEmpty" style="display:none;" data-i18n="noPoints">Нет сохранённых точек</div>
+                                <div class="dropdown-add-btn" onclick="openModal()">
+                                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                                    <span data-i18n="addPoint">Добавить точку</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <div class="panel-label" data-i18n="searchDistance">Дистанция поиска</div>
+                        <div class="distance-selector-row" id="distanceSelectorRow">
+                            <button class="distance-option" data-dist="250" onclick="setDistance(250)">250 м</button>
+                            <button class="distance-option active" data-dist="500" onclick="setDistance(500)">500 м</button>
+                            <button class="distance-option" data-dist="750" onclick="setDistance(750)">750 м</button>
+                            <button class="distance-option" data-dist="1000" onclick="setDistance(1000)">1 км</button>
+                        </div>
+                    </div>
+
+                    <div class="toggle-row">
+                        <span class="toggle-label" data-i18n="disability">Инвалид</span>
+                        <div class="toggle-switch" id="disabilityToggle" onclick="toggleDisability()"></div>
                     </div>
                 </div>
-
-                <button class="btn-add-point" onclick="openModal()">
-                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    <span data-i18n="addPoint">Добавить точку</span>
-                </button>
             </div>
 
+            <!-- ===== INSTRUCTION VIEW ===== -->
+            <div class="instruction-view" id="instructionView">
+                <div class="view-header">
+                    <button class="btn-back" onclick="closeInstruction()">
+                        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    </button>
+                    <div class="view-title" data-i18n="instruction">Инструкция</div>
+                </div>
+                <div class="instruction-content">
+                    <div class="instruction-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <p class="instruction-text" data-i18n="instructionSoon">Здесь скоро будет инструкция</p>
+                </div>
+            </div>
+
+            <!-- ===== SETTINGS VIEW ===== -->
             <div class="settings-view" id="settingsView">
                 <div class="view-header">
                     <button class="btn-back" onclick="closeSettings()">
@@ -853,6 +870,7 @@
                 </div>
             </div>
 
+            <!-- ===== CHAT VIEW ===== -->
             <div class="chat-view" id="chatView">
                 <div class="view-header">
                     <button class="btn-back" onclick="closeChat()">
@@ -869,62 +887,11 @@
                 </div>
             </div>
 
+            <!-- ===== MAP (ОБНОВЛЕНО ПОД PNG) ===== -->
             <div class="map-container" id="mapContainer">
                 <div class="map-wrapper" id="mapWrapper">
-                    <svg id="mapSvg" viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="360" height="480" fill="var(--map-bg)"/>
-                        <rect x="0" y="200" width="360" height="80" fill="var(--map-road)"/>
-                        <rect x="140" y="0" width="80" height="480" fill="var(--map-road)"/>
-                        <line x1="0" y1="240" x2="140" y2="240" stroke="var(--map-line)" stroke-width="2" stroke-dasharray="12,8"/>
-                        <line x1="220" y1="240" x2="360" y2="240" stroke="var(--map-line)" stroke-width="2" stroke-dasharray="12,8"/>
-                        <line x1="180" y1="0" x2="180" y2="200" stroke="var(--map-line)" stroke-width="2" stroke-dasharray="12,8"/>
-                        <line x1="180" y1="280" x2="180" y2="480" stroke="var(--map-line)" stroke-width="2" stroke-dasharray="12,8"/>
-                        <rect x="10" y="10" width="120" height="80" rx="4" fill="var(--map-building-1)"/>
-                        <rect x="10" y="100" width="50" height="90" rx="4" fill="var(--map-building-2)"/>
-                        <rect x="70" y="100" width="60" height="90" rx="4" fill="var(--map-building-3)"/>
-                        <rect x="230" y="10" width="120" height="100" rx="4" fill="var(--map-building-1)"/>
-                        <rect x="230" y="120" width="60" height="70" rx="4" fill="var(--map-building-2)"/>
-                        <rect x="300" y="120" width="50" height="70" rx="4" fill="var(--map-building-3)"/>
-                        <rect x="10" y="290" width="120" height="80" rx="4" fill="var(--map-building-1)"/>
-                        <rect x="10" y="380" width="80" height="90" rx="4" fill="var(--map-building-2)"/>
-                        <rect x="100" y="380" width="30" height="90" rx="4" fill="var(--map-building-3)"/>
-                        <rect x="230" y="290" width="120" height="90" rx="4" fill="var(--map-building-1)"/>
-                        <rect x="230" y="390" width="50" height="80" rx="4" fill="var(--map-building-2)"/>
-                        <rect x="290" y="390" width="60" height="80" rx="4" fill="var(--map-building-3)"/>
-                        <rect x="15" y="155" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="42" y="155" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="235" y="155" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="262" y="155" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="289" y="155" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="316" y="155" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="15" y="310" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="42" y="310" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="69" y="310" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="96" y="310" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="235" y="310" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="262" y="310" width="22" height="35" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="289" y="310" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="316" y="310" width="22" height="35" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="320" y="210" width="30" height="18" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect x="320" y="252" width="30" height="18" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="10" y="210" width="30" height="18" rx="2" fill="#ef4444" opacity="0.8"/>
-                        <rect x="10" y="252" width="30" height="18" rx="2" fill="#22c55e" opacity="0.8"/>
-                        <rect class="nearest-highlight" x="40" y="153" width="26" height="39" rx="3" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
-                        <g class="arrow-indicator">
-                            <line x1="100" y1="210" x2="60" y2="175" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
-                            <polygon points="58,172 66,172 60,164" fill="#fbbf24"/>
-                            <text x="105" y="218" fill="#fbbf24" font-size="10" font-weight="600" font-family="Inter">~40м</text>
-                        </g>
-                        <g class="car-group">
-                            <rect x="165" y="225" width="30" height="50" rx="6" fill="#3b82f6"/>
-                            <rect x="169" y="230" width="22" height="12" rx="3" fill="#60a5fa" opacity="0.6"/>
-                            <rect x="169" y="258" width="22" height="10" rx="3" fill="#60a5fa" opacity="0.6"/>
-                            <rect x="163" y="232" width="4" height="10" rx="2" fill="#1e3a5f"/>
-                            <rect x="193" y="232" width="4" height="10" rx="2" fill="#1e3a5f"/>
-                            <rect x="163" y="258" width="4" height="10" rx="2" fill="#1e3a5f"/>
-                            <rect x="193" y="258" width="4" height="10" rx="2" fill="#1e3a5f"/>
-                        </g>
-                    </svg>
+                    <!-- Твоя картинка -->
+                    <img id="mapImage" src="Карта-1.png" alt="Карта" draggable="false">
                 </div>
                 <div class="map-info" id="mapInfo">
                     <div class="map-info-title" id="mapInfoTitle">Текущее местоположение</div>
@@ -949,63 +916,41 @@
             </button>
         </div>
 
-        <!-- МОДАЛКА ОПЛАТЫ -->
+        <!-- ===== PAYMENT OVERLAY ===== -->
         <div class="payment-overlay" id="paymentOverlay">
             <div class="payment-modal">
                 <div id="paymentFormContent">
                     <div class="payment-header">
                         <div>
                             <div class="payment-title" data-i18n="paymentTitle">Оплата подписки</div>
-                            <div class="payment-subtitle" data-i18n="paymentSubtitle">Оформление подписки</div>
+                            <div class="payment-subtitle" data-i18n="paymentSubtitle">Выберите тариф</div>
                         </div>
                         <button class="btn-close-payment" onclick="closePayment()" title="Закрыть">
                             <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                         </button>
                     </div>
 
-                    <div class="premium-card">
-                        <div class="premium-badge">⭐ Premium</div>
-                        <div class="premium-title" data-i18n="premiumTitle">Премиум подписка</div>
-                        <div class="premium-price">
-                            <span id="oldPriceInline" style="display:none;" class="old-price">299,99 ₽</span>
-                            <strong id="currentPrice">299,99 ₽</strong> / <span data-i18n="perMonth">в месяц</span> · <span data-i18n="cancelAnytime">отмена в любое время</span>
-                        </div>
+                    <div class="free-trial-banner">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <div class="free-trial-banner-text" data-i18n="freeTrial">Первый день — бесплатно!<br>Затем выберите подходящий тариф.</div>
                     </div>
 
-                    <div class="premium-features">
-                        <div class="premium-feature">
-                            <div class="premium-feature-icon">
-                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <div class="tariff-options" id="tariffOptions">
+                        <div class="tariff-card selected" data-tariff="monthly" onclick="selectTariff('monthly')">
+                            <div class="tariff-badge">Популярный</div>
+                            <div class="tariff-name" data-i18n="monthlyTariff">Месячная подписка</div>
+                            <div class="tariff-price"><strong id="monthlyPrice">199,99 ₽</strong> / <span data-i18n="perMonth">в месяц</span></div>
+                            <div class="tariff-desc" data-i18n="monthlyDesc">Гибкость — оплата каждый месяц, отмена в любое время</div>
+                        </div>
+                        <div class="tariff-card" data-tariff="yearly" onclick="selectTariff('yearly')">
+                            <div class="tariff-badge year-badge" data-i18n="bestValue">Выгодно</div>
+                            <div class="tariff-name" data-i18n="yearlyTariff">Годовая подписка</div>
+                            <div class="tariff-price">
+                                <span class="old-price">2 399,88 ₽</span>
+                                <strong id="yearlyPrice">1 799,99 ₽</strong> / <span data-i18n="perYear">в год</span>
                             </div>
-                            <span data-i18n="feature1">Безлимитный доступ ко всем функциям</span>
+                            <div class="tariff-desc" data-i18n="yearlyDesc">Экономия 25% — всего 149,99 ₽ в месяц</div>
                         </div>
-                        <div class="premium-feature">
-                            <div class="premium-feature-icon">
-                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            </div>
-                            <span data-i18n="feature2">Приоритетная поддержка 24/7</span>
-                        </div>
-                        <div class="premium-feature">
-                            <div class="premium-feature-icon">
-                                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            </div>
-                            <span data-i18n="feature3">Эксклюзивный контент и обновления</span>
-                        </div>
-                    </div>
-
-                    <div class="discount-block">
-                        <div class="discount-title" data-i18n="discountTitle">У меня есть льгота</div>
-                        <div class="discount-subtitle" data-i18n="discountSubtitle">Для получения льготы необходимо подтвердить статус через портал Госуслуг</div>
-                        <div class="discount-price">
-                            <span data-i18n="discountPrice">Скидка до</span>
-                            <span id="oldDiscountPrice" style="display:none;" class="old-price">299,99 ₽</span>
-                            <strong id="discountPrice">199,99 ₽/мес</strong>
-                        </div>
-                        <button class="btn-gosuslugi" id="btnGosuslugi" onclick="confirmGosuslugi()">
-                            <svg class="btn-gosuslugi-icon" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                            <div class="spinner"></div>
-                            <span class="btn-gosuslugi-text" data-i18n="confirmGosuslugi">Подтвердить через Госуслуги</span>
-                        </button>
                     </div>
 
                     <div class="payment-form">
@@ -1019,7 +964,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-pay" id="btnPay" onclick="processPayment()" data-i18n="payButton">Оплатить 299,99 ₽</button>
+                    <button class="btn-pay" id="btnPay" onclick="processPayment()">Оплатить 199,99 ₽</button>
                     <div class="payment-secure">
                         <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 8V6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9z"/></svg>
                         <span data-i18n="securePayment">Безопасная оплата · данные защищены</span>
@@ -1031,12 +976,13 @@
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                     </div>
                     <div class="success-title" data-i18n="paymentSuccessTitle">Оплата прошла успешно!</div>
-                    <div class="success-subtitle" data-i18n="paymentSuccessSubtitle">Премиум подписка активирована</div>
+                    <div class="success-subtitle" data-i18n="paymentSuccessSubtitle">Подписка активирована</div>
                     <button class="btn-continue" onclick="continueAfterPayment()" data-i18n="continue">Продолжить</button>
                 </div>
             </div>
         </div>
 
+        <!-- ===== ADD/EDIT POINT MODAL ===== -->
         <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
             <div class="modal">
                 <div class="modal-title" id="modalTitle" data-i18n="newPoint">Новая точка</div>
@@ -1048,23 +994,6 @@
                 <div class="modal-field">
                     <div class="modal-label" data-i18n="address">Адрес</div>
                     <input type="text" class="modal-input" id="inputAddress" data-i18n-placeholder="addressPlaceholder">
-                </div>
-                <div class="modal-field">
-                    <div class="modal-label" data-i18n="searchDistance">Дистанция поиска</div>
-                    <div class="distance-value" id="distanceValue">500 м</div>
-                    <div class="distance-slider">
-                        <div class="distance-track">
-                            <div class="distance-fill" id="distanceFill"></div>
-                            <div class="distance-dots">
-                                <div class="distance-dot active"></div>
-                                <div class="distance-dot"></div>
-                                <div class="distance-dot"></div>
-                                <div class="distance-dot"></div>
-                            </div>
-                            <div class="distance-thumb" id="distanceThumb"></div>
-                        </div>
-                        <div class="distance-labels" id="distanceLabels"></div>
-                    </div>
                 </div>
                 <div class="modal-buttons">
                     <button class="btn-modal cancel" onclick="closeModal()" data-i18n="cancel">Отмена</button>
@@ -1084,16 +1013,286 @@
         })();
 
         const translations = {
-            ru: { search: 'Поиск', currentLocation: 'Текущее местоположение', currentLocationDesc: 'Ваше текущее положение', emptyState: 'Добавьте точки<br>для быстрого доступа', addPoint: 'Добавить точку', settings: 'Настройки', support: 'Техподдержка', theme: 'Тема', themeDark: 'Тёмная', themeLight: 'Светлая', language: 'Язык', newPoint: 'Новая точка', editPoint: 'Редактировать точку', name: 'Название', namePlaceholder: 'Например: Дом', address: 'Адрес', addressPlaceholder: 'ул. Примерная, 10', searchDistance: 'Дистанция поиска', cancel: 'Отмена', savePoint: 'Сохранить точку', saveChanges: 'Сохранить изменения', noResults: 'Ничего не найдено', forQuery: 'по запросу', free: 'Свободно', occupied: 'Занято', yourCar: 'Ваш авто', show: 'Показать', hide: 'Скрыть', zone: 'Зона', edit: 'Редактировать', delete: 'Удалить', chatPlaceholder: 'Напишите сообщение...', welcomeMessage: 'Здравствуйте, мы компания РиТуИ! 👋\n\nЭто техническая поддержка GeoPark.\n\nРасскажите, пожалуйста, с какой проблемой вы столкнулись? Я постараюсь помочь вам как можно скорее.', today: 'Сегодня', paymentTitle: 'Оплата подписки', paymentSubtitle: 'Оформление подписки', premiumTitle: 'Премиум подписка', perMonth: 'в месяц', cancelAnytime: 'отмена в любое время', feature1: 'Безлимитный доступ ко всем функциям', feature2: 'Приоритетная поддержка 24/7', feature3: 'Эксклюзивный контент и обновления', discountTitle: 'У меня есть льгота', discountSubtitle: 'Для получения льготы необходимо подтвердить статус через портал Госуслуг', discountPrice: 'Скидка до', confirmGosuslugi: 'Подтвердить через Госуслуги', gosuslugiConfirmed: '✓ Льгота подтверждена', cardDetails: 'Данные карты', payButton: 'Оплатить 299,99 ₽', payButtonDiscount: 'Оплатить 199,99 ₽', securePayment: 'Безопасная оплата · данные защищены', paymentSuccessTitle: 'Оплата прошла успешно!', paymentSuccessSubtitle: 'Премиум подписка активирована', continue: 'Продолжить' },
-            en: { search: 'Search', currentLocation: 'Current location', currentLocationDesc: 'Your current position', emptyState: 'Add points<br>for quick access', addPoint: 'Add point', settings: 'Settings', support: 'Support', theme: 'Theme', themeDark: 'Dark', themeLight: 'Light', language: 'Language', newPoint: 'New point', editPoint: 'Edit point', name: 'Name', namePlaceholder: 'For example: Home', address: 'Address', addressPlaceholder: '123 Example St', searchDistance: 'Search distance', cancel: 'Cancel', savePoint: 'Save point', saveChanges: 'Save changes', noResults: 'Nothing found', forQuery: 'for query', free: 'Free', occupied: 'Occupied', yourCar: 'Your car', show: 'Show', hide: 'Hide', zone: 'Zone', edit: 'Edit', delete: 'Delete', chatPlaceholder: 'Write a message...', welcomeMessage: 'Hello, we are RiTuI company! 👋\n\nThis is GeoPark technical support.\n\nPlease tell me what problem you\'re facing? I\'ll try to help you as soon as possible.', today: 'Today', paymentTitle: 'Subscription payment', paymentSubtitle: 'Subscribe now', premiumTitle: 'Premium subscription', perMonth: 'per month', cancelAnytime: 'cancel anytime', feature1: 'Unlimited access to all features', feature2: 'Priority support 24/7', feature3: 'Exclusive content and updates', discountTitle: 'I have a benefit', discountSubtitle: 'To receive a discount, confirm your status via Gosuslugi portal', discountPrice: 'Discount up to', confirmGosuslugi: 'Confirm via Gosuslugi', gosuslugiConfirmed: '✓ Benefit confirmed', cardDetails: 'Card details', payButton: 'Pay 299.99 ₽', payButtonDiscount: 'Pay 199.99 ₽', securePayment: 'Secure payment · data protected', paymentSuccessTitle: 'Payment successful!', paymentSuccessSubtitle: 'Premium subscription activated', continue: 'Continue' },
-            es: { search: 'Buscar', currentLocation: 'Ubicación actual', currentLocationDesc: 'Tu posición actual', emptyState: 'Añade puntos<br>para acceso rápido', addPoint: 'Añadir punto', settings: 'Ajustes', support: 'Soporte', theme: 'Tema', themeDark: 'Oscuro', themeLight: 'Claro', language: 'Idioma', newPoint: 'Nuevo punto', editPoint: 'Editar punto', name: 'Nombre', namePlaceholder: 'Por ejemplo: Casa', address: 'Dirección', addressPlaceholder: 'Calle Ejemplo, 10', searchDistance: 'Distancia de búsqueda', cancel: 'Cancelar', savePoint: 'Guardar punto', saveChanges: 'Guardar cambios', noResults: 'No se encontró nada', forQuery: 'para la consulta', free: 'Libre', occupied: 'Ocupado', yourCar: 'Tu coche', show: 'Mostrar', hide: 'Ocultar', zone: 'Zona', edit: 'Editar', delete: 'Eliminar', chatPlaceholder: 'Escribe un mensaje...', welcomeMessage: '¡Hola, somos la empresa RiTuI! 👋\n\nEste es el soporte técnico de GeoPark.\n\nCuéntame, ¿qué problema tienes? Intentaré ayudarte lo antes posible.', today: 'Hoy', paymentTitle: 'Pago de suscripción', paymentSubtitle: 'Suscríbete ahora', premiumTitle: 'Suscripción Premium', perMonth: 'al mes', cancelAnytime: 'cancela cuando quieras', feature1: 'Acceso ilimitado a todas las funciones', feature2: 'Soporte prioritario 24/7', feature3: 'Contenido exclusivo y actualizaciones', discountTitle: 'Tengo un beneficio', discountSubtitle: 'Para obtener el descuento, confirma tu estado a través del portal Gosuslugi', discountPrice: 'Descuento hasta', confirmGosuslugi: 'Confirmar vía Gosuslugi', gosuslugiConfirmed: '✓ Beneficio confirmado', cardDetails: 'Datos de la tarjeta', payButton: 'Pagar 299,99 ₽', payButtonDiscount: 'Pagar 199,99 ₽', securePayment: 'Pago seguro · datos protegidos', paymentSuccessTitle: '¡Pago exitoso!', paymentSuccessSubtitle: 'Suscripción Premium activada', continue: 'Continuar' },
-            zh: { search: '搜索', currentLocation: '当前位置', currentLocationDesc: '您的当前位置', emptyState: '添加地点<br>以便快速访问', addPoint: '添加地点', settings: '设置', support: '技术支持', theme: '主题', themeDark: '深色', themeLight: '浅色', language: '语言', newPoint: '新地点', editPoint: '编辑地点', name: '名称', namePlaceholder: '例如：家', address: '地址', addressPlaceholder: '示例路10号', searchDistance: '搜索距离', cancel: '取消', savePoint: '保存地点', saveChanges: '保存更改', noResults: '未找到结果', forQuery: '对于查询', free: '空闲', occupied: '已占用', yourCar: '您的车', show: '显示', hide: '隐藏', zone: '区域', edit: '编辑', delete: '删除', chatPlaceholder: '输入消息...', welcomeMessage: '您好，我们是RiTuiI公司！ 👋\n\n这是GeoPark技术支持。\n\n请告诉我您遇到了什么问题？我会尽快帮助您。', today: '今天', paymentTitle: '订阅付款', paymentSubtitle: '立即订阅', premiumTitle: '高级订阅', perMonth: '每月', cancelAnytime: '随时取消', feature1: '无限访问所有功能', feature2: '24/7优先支持', feature3: '独家内容和更新', discountTitle: '我有优惠', discountSubtitle: '要获得折扣，请通过Gosuslugi门户确认您的身份', discountPrice: '折扣至', confirmGosuslugi: '通过Gosuslugi确认', gosuslugiConfirmed: '✓ 优惠已确认', cardDetails: '卡信息', payButton: '支付 299.99 ₽', payButtonDiscount: '支付 199.99 ₽', securePayment: '安全支付 · 数据受保护', paymentSuccessTitle: '支付成功！', paymentSuccessSubtitle: '高级订阅已激活', continue: '继续' },
-            hi: { search: 'खोज', currentLocation: 'वर्तमान स्थान', currentLocationDesc: 'आपकी वर्तमान स्थिति', emptyState: 'त्वरित पहुंच के लिए<br>बिंदु जोड़ें', addPoint: 'बिंदु जोड़ें', settings: 'सेटिंग्स', support: 'सहायता', theme: 'थीम', themeDark: 'गहरा', themeLight: 'हल्का', language: 'भाषा', newPoint: 'नया बिंदु', editPoint: 'बिंदु संपादित करें', name: 'नाम', namePlaceholder: 'उदाहरण: घर', address: 'पता', addressPlaceholder: 'उदाहरण सड़क, 10', searchDistance: 'खोज दूरी', cancel: 'रद्द करें', savePoint: 'बिंदु सहेजें', saveChanges: 'परिवर्तन सहेजें', noResults: 'कुछ नहीं मिला', forQuery: 'क्वेरी के लिए', free: 'खाली', occupied: 'व्यस्त', yourCar: 'आपकी कार', show: 'दिखाएं', hide: 'छुपाएं', zone: 'क्षेत्र', edit: 'संपादित', delete: 'हटाएं', chatPlaceholder: 'संदेश लिखें...', welcomeMessage: 'नमस्ते, हम RiTuI कंपनी हैं! 👋\n\nयह GeoPark तकनीकी सहायता है।\n\nकृपया बताएं आपको क्या समस्या है? मैं जल्द से जल्द मदद करने का प्रयास करूंगा।', today: 'आज', paymentTitle: 'सदस्यता भुगतान', paymentSubtitle: 'अभी सदस्यता लें', premiumTitle: 'प्रीमियम सदस्यता', perMonth: 'प्रति माह', cancelAnytime: 'कभी भी रद्द करें', feature1: 'सभी सुविधाओं तक असीमित पहुंच', feature2: '24/7 प्राथमिकता सहायता', feature3: 'विशेष सामग्री और अपडेट', discountTitle: 'मेरे पास लाभ है', discountSubtitle: 'छूट प्राप्त करने के लिए, Gosuslugi पोर्टल के माध्यम से अपनी स्थिति की पुष्टि करें', discountPrice: 'तक छूट', confirmGosuslugi: 'Gosuslugi के माध्यम से पुष्टि करें', gosuslugiConfirmed: '✓ लाभ की पुष्टि', cardDetails: 'कार्ड विवरण', payButton: '299.99 ₽ का भुगतान करें', payButtonDiscount: '199.99 ₽ का भुगतान करें', securePayment: 'सुरक्षित भुगतान · डेटा सुरक्षित', paymentSuccessTitle: 'भुगतान सफल!', paymentSuccessSubtitle: 'प्रीमियम सदस्यता सक्रिय', continue: 'जारी रखें' },
-            ar: { search: 'بحث', currentLocation: 'الموقع الحالي', currentLocationDesc: 'موقعك الحالي', emptyState: 'أضف نقاطًا<br>للوصول السريع', addPoint: 'إضافة نقطة', settings: 'الإعدادات', support: 'الدعم', theme: 'السمة', themeDark: 'داكن', themeLight: 'فاتح', language: 'اللغة', newPoint: 'نقطة جديدة', editPoint: 'تعديل النقطة', name: 'الاسم', namePlaceholder: 'مثال: المنزل', address: 'العنوان', addressPlaceholder: 'شارع المثال، 10', searchDistance: 'مسافة البحث', cancel: 'إلغاء', savePoint: 'حفظ النقطة', saveChanges: 'حفظ التغييرات', noResults: 'لم يتم العثور على شيء', forQuery: 'للاستعلام', free: 'متاح', occupied: 'مشغول', yourCar: 'سيارتك', show: 'إظهار', hide: 'إخفاء', zone: 'منطقة', edit: 'تعديل', delete: 'حذف', chatPlaceholder: 'اكتب رسالة...', welcomeMessage: 'مرحبًا، نحن شركة RiTuI! 👋\n\nهذا هو الدعم الفني لـ GeoPark.\n\nأخبرني من فضلك ما المشكلة التي تواجهها؟ سأحاول مساعدتك في أقرب وقت ممكن.', today: 'اليوم', paymentTitle: 'دفع الاشتراك', paymentSubtitle: 'اشترك الآن', premiumTitle: 'اشتراك بريميوم', perMonth: 'شهريًا', cancelAnytime: 'إلغاء في أي وقت', feature1: 'وصول غير محدود لجميع الميزات', feature2: 'دعم ذو أولوية 24/7', feature3: 'محتوى حصري وتحديثات', discountTitle: 'لدي ميزة', discountSubtitle: 'للحصول على الخصم، أكد حالتك عبر بوابة Gosuslugi', discountPrice: 'خصم حتى', confirmGosuslugi: 'تأكيد عبر Gosuslugi', gosuslugiConfirmed: '✓ تم تأكيد الميزة', cardDetails: 'بيانات البطاقة', payButton: 'ادفع 299.99 ₽', payButtonDiscount: 'ادفع 199.99 ₽', securePayment: 'دفع آمن · البيانات محمية', paymentSuccessTitle: 'تم الدفع بنجاح!', paymentSuccessSubtitle: 'تم تفعيل اشتراك بريميوم', continue: 'متابعة' },
-            pt: { search: 'Pesquisar', currentLocation: 'Localização atual', currentLocationDesc: 'Sua posição atual', emptyState: 'Adicione pontos<br>para acesso rápido', addPoint: 'Adicionar ponto', settings: 'Configurações', support: 'Suporte', theme: 'Tema', themeDark: 'Escuro', themeLight: 'Claro', language: 'Idioma', newPoint: 'Novo ponto', editPoint: 'Editar ponto', name: 'Nome', namePlaceholder: 'Por exemplo: Casa', address: 'Endereço', addressPlaceholder: 'Rua Exemplo, 10', searchDistance: 'Distância de pesquisa', cancel: 'Cancelar', savePoint: 'Salvar ponto', saveChanges: 'Salvar alterações', noResults: 'Nada encontrado', forQuery: 'para a consulta', free: 'Livre', occupied: 'Ocupado', yourCar: 'Seu carro', show: 'Mostrar', hide: 'Ocultar', zone: 'Zona', edit: 'Editar', delete: 'Excluir', chatPlaceholder: 'Escreva uma mensagem...', welcomeMessage: 'Olá, somos a empresa RiTuI! 👋\n\nEste é o suporte técnico do GeoPark.\n\nPor favor, me conte qual problema você está enfrentando? Tentarei ajudá-lo o mais rápido possível.', today: 'Hoje', paymentTitle: 'Pagamento de assinatura', paymentSubtitle: 'Assine agora', premiumTitle: 'Assinatura Premium', perMonth: 'por mês', cancelAnytime: 'cancele a qualquer momento', feature1: 'Acesso ilimitado a todos os recursos', feature2: 'Suporte prioritário 24/7', feature3: 'Conteúdo exclusivo e atualizações', discountTitle: 'Tenho um benefício', discountSubtitle: 'Para obter o desconto, confirme seu status pelo portal Gosuslugi', discountPrice: 'Desconto até', confirmGosuslugi: 'Confirmar via Gosuslugi', gosuslugiConfirmed: '✓ Benefício confirmado', cardDetails: 'Dados do cartão', payButton: 'Pagar 299,99 ₽', payButtonDiscount: 'Pagar 199,99 ₽', securePayment: 'Pagamento seguro · dados protegidos', paymentSuccessTitle: 'Pagamento bem-sucedido!', paymentSuccessSubtitle: 'Assinatura Premium ativada', continue: 'Continuar' },
-            ja: { search: '検索', currentLocation: '現在地', currentLocationDesc: 'あなたの現在位置', emptyState: 'ポイントを追加して<br>クイックアクセス', addPoint: 'ポイントを追加', settings: '設定', support: 'サポート', theme: 'テーマ', themeDark: 'ダーク', themeLight: 'ライト', language: '言語', newPoint: '新しいポイント', editPoint: 'ポイントを編集', name: '名前', namePlaceholder: '例：自宅', address: '住所', addressPlaceholder: '例路10', searchDistance: '検索距離', cancel: 'キャンセル', savePoint: 'ポイントを保存', saveChanges: '変更を保存', noResults: '見つかりません', forQuery: 'クエリ', free: '空き', occupied: '使用中', yourCar: 'あなたの車', show: '表示', hide: '非表示', zone: 'ゾーン', edit: '編集', delete: '削除', chatPlaceholder: 'メッセージを書く...', welcomeMessage: 'こんにちは、私たちはRiTuiI社です！ \n\nGeoParkのテクニカルサポートです。\n\nどのような問題に直面していますか？できるだけ早くお手伝いします。', today: '今日', paymentTitle: 'サブスクリプション支払い', paymentSubtitle: '今すぐ購読', premiumTitle: 'プレミアムサブスクリプション', perMonth: '月額', cancelAnytime: 'いつでもキャンセル', feature1: 'すべての機能への無制限アクセス', feature2: '24/7優先サポート', feature3: '独占コンテンツとアップデート', discountTitle: '特典があります', discountSubtitle: '割引を受けるには、Gosuslugiポータルでステータスを確認してください', discountPrice: '最大割引', confirmGosuslugi: 'Gosuslugiで確認', gosuslugiConfirmed: '✓ 特典確認済み', cardDetails: 'カード情報', payButton: '299.99₽を支払う', payButtonDiscount: '199.99₽を支払う', securePayment: '安全な支払い·データ保護', paymentSuccessTitle: '支払い成功！', paymentSuccessSubtitle: 'プレミアムサブスクリプションが有効化されました', continue: '続ける' },
-            de: { search: 'Suche', currentLocation: 'Aktueller Standort', currentLocationDesc: 'Ihre aktuelle Position', emptyState: 'Punkte hinzufügen<br>für schnellen Zugriff', addPoint: 'Punkt hinzufügen', settings: 'Einstellungen', support: 'Support', theme: 'Thema', themeDark: 'Dunkel', themeLight: 'Hell', language: 'Sprache', newPoint: 'Neuer Punkt', editPoint: 'Punkt bearbeiten', name: 'Name', namePlaceholder: 'Zum Beispiel: Zuhause', address: 'Adresse', addressPlaceholder: 'Beispielstr. 10', searchDistance: 'Suchentfernung', cancel: 'Abbrechen', savePoint: 'Punkt speichern', saveChanges: 'Änderungen speichern', noResults: 'Nichts gefunden', forQuery: 'für Anfrage', free: 'Frei', occupied: 'Belegt', yourCar: 'Ihr Auto', show: 'Anzeigen', hide: 'Ausblenden', zone: 'Zone', edit: 'Bearbeiten', delete: 'Löschen', chatPlaceholder: 'Nachricht schreiben...', welcomeMessage: 'Hallo, wir sind die Firma RiTuI! 👋\n\nDies ist der GeoPark Technical Support.\n\nBitte erzählen Sie mir, welches Problem Sie haben? Ich werde versuchen, Ihnen so schnell wie möglich zu helfen.', today: 'Heute', paymentTitle: 'Abonnementzahlung', paymentSubtitle: 'Jetzt abonnieren', premiumTitle: 'Premium-Abonnement', perMonth: 'pro Monat', cancelAnytime: 'jederzeit kündbar', feature1: 'Unbegrenzter Zugriff auf alle Funktionen', feature2: 'Prioritäts-Support 24/7', feature3: 'Exklusive Inhalte und Updates', discountTitle: 'Ich habe einen Vorteil', discountSubtitle: 'Um den Rabatt zu erhalten, bestätigen Sie Ihren Status über das Gosuslugi-Portal', discountPrice: 'Rabatt bis zu', confirmGosuslugi: 'Über Gosuslugi bestätigen', gosuslugiConfirmed: '✓ Vorteil bestätigt', cardDetails: 'Kartendaten', payButton: '299,99 ₽ bezahlen', payButtonDiscount: '199,99 ₽ bezahlen', securePayment: 'Sichere Zahlung · Daten geschützt', paymentSuccessTitle: 'Zahlung erfolgreich!', paymentSuccessSubtitle: 'Premium-Abonnement aktiviert', continue: 'Weiter' },
-            fr: { search: 'Rechercher', currentLocation: 'Position actuelle', currentLocationDesc: 'Votre position actuelle', emptyState: 'Ajoutez des points<br>pour un accès rapide', addPoint: 'Ajouter un point', settings: 'Paramètres', support: 'Support', theme: 'Thème', themeDark: 'Sombre', themeLight: 'Clair', language: 'Langue', newPoint: 'Nouveau point', editPoint: 'Modifier le point', name: 'Nom', namePlaceholder: 'Par exemple : Maison', address: 'Adresse', addressPlaceholder: 'Rue Exemple, 10', searchDistance: 'Distance de recherche', cancel: 'Annuler', savePoint: 'Enregistrer le point', saveChanges: 'Enregistrer les modifications', noResults: 'Aucun résultat', forQuery: 'pour la requête', free: 'Libre', occupied: 'Occupé', yourCar: 'Votre voiture', show: 'Afficher', hide: 'Masquer', zone: 'Zone', edit: 'Modifier', delete: 'Supprimer', chatPlaceholder: 'Écrivez un message...', welcomeMessage: 'Bonjour, nous sommes la société RiTuI ! 👋\n\nC\'est le support technique GeoPark.\n\nDites-moi quel problème vous rencontrez ? J\'essaierai de vous aider le plus rapidement possible.', today: 'Aujourd\'hui', paymentTitle: 'Paiement d\'abonnement', paymentSubtitle: 'Abonnez-vous maintenant', premiumTitle: 'Abonnement Premium', perMonth: 'par mois', cancelAnytime: 'annulez à tout moment', feature1: 'Accès illimité à toutes les fonctionnalités', feature2: 'Support prioritaire 24/7', feature3: 'Contenu exclusif et mises à jour', discountTitle: 'J\'ai un avantage', discountSubtitle: 'Pour obtenir la réduction, confirmez votre statut via le portail Gosuslugi', discountPrice: 'Réduction jusqu\'à', confirmGosuslugi: 'Confirmer via Gosuslugi', gosuslugiConfirmed: '✓ Avantage confirmé', cardDetails: 'Détails de la carte', payButton: 'Payer 299,99 ₽', payButtonDiscount: 'Payer 199,99 ₽', securePayment: 'Paiement sécurisé · données protégées', paymentSuccessTitle: 'Paiement réussi !', paymentSuccessSubtitle: 'Abonnement Premium activé', continue: 'Continuer' }
+            ru: {
+                search: 'Поиск', currentLocation: 'Текущее местоположение', currentLocationDesc: 'Ваше текущее положение',
+                emptyState: 'Добавьте точки<br>для быстрого доступа', addPoint: 'Добавить точку',
+                settings: 'Настройки', support: 'Техподдержка', instruction: 'Инструкция',
+                instructionSoon: 'Здесь скоро будет инструкция',
+                theme: 'Тема', themeDark: 'Тёмная', themeLight: 'Светлая', language: 'Язык',
+                newPoint: 'Новая точка', editPoint: 'Редактировать точку',
+                name: 'Название', namePlaceholder: 'Например: Дом',
+                address: 'Адрес', addressPlaceholder: 'ул. Примерная, 10',
+                cancel: 'Отмена', savePoint: 'Сохранить точку', saveChanges: 'Сохранить изменения',
+                noResults: 'Ничего не найдено', forQuery: 'по запросу', noPoints: 'Нет сохранённых точек',
+                free: 'Свободно', occupied: 'Занято', yourCar: 'Ваш авто',
+                show: 'Показать', hide: 'Скрыть', zone: 'Зона',
+                edit: 'Редактировать', delete: 'Удалить',
+                chatPlaceholder: 'Напишите сообщение...',
+                welcomeMessage: 'Здравствуйте, мы компания РиТуИ! 👋\n\nЭто техническая поддержка ГеоПарк.\n\nРасскажите, пожалуйста, с какой проблемой вы столкнулись? Я постараюсь помочь вам как можно скорее.',
+                today: 'Сегодня',
+                carDimensions: 'Габариты автомобиля', width: 'Ширина', length: 'Длина',
+                selectPoint: 'Точка', searchDistance: 'Дистанция поиска', disability: 'Инвалид',
+                paymentTitle: 'Оплата подписки', paymentSubtitle: 'Выберите тариф',
+                freeTrial: 'Первый день — бесплатно!<br>Затем выберите подходящий тариф.',
+                monthlyTariff: 'Месячная подписка', monthlyDesc: 'Гибкость — оплата каждый месяц, отмена в любое время',
+                yearlyTariff: 'Годовая подписка', yearlyDesc: 'Экономия 25% — всего 149,99 ₽ в месяц',
+                bestValue: 'Выгодно', perMonth: 'в месяц', perYear: 'в год',
+                cardDetails: 'Данные карты', securePayment: 'Безопасная оплата · данные защищены',
+                paymentSuccessTitle: 'Оплата прошла успешно!', paymentSuccessSubtitle: 'Подписка активирована',
+                continue: 'Продолжить'
+            },
+            en: {
+                search: 'Search', currentLocation: 'Current location', currentLocationDesc: 'Your current position',
+                emptyState: 'Add points<br>for quick access', addPoint: 'Add point',
+                settings: 'Settings', support: 'Support', instruction: 'Instruction',
+                instructionSoon: 'Instruction will be here soon',
+                theme: 'Theme', themeDark: 'Dark', themeLight: 'Light', language: 'Language',
+                newPoint: 'New point', editPoint: 'Edit point',
+                name: 'Name', namePlaceholder: 'For example: Home',
+                address: 'Address', addressPlaceholder: '123 Example St',
+                cancel: 'Cancel', savePoint: 'Save point', saveChanges: 'Save changes',
+                noResults: 'Nothing found', forQuery: 'for query', noPoints: 'No saved points',
+                free: 'Free', occupied: 'Occupied', yourCar: 'Your car',
+                show: 'Show', hide: 'Hide', zone: 'Zone',
+                edit: 'Edit', delete: 'Delete',
+                chatPlaceholder: 'Write a message...',
+                welcomeMessage: 'Hello, we are RiTuI company! 👋\n\nThis is GeoPark technical support.\n\nPlease tell me what problem you\'re facing? I\'ll try to help you as soon as possible.',
+                today: 'Today',
+                carDimensions: 'Car dimensions', width: 'Width', length: 'Length',
+                selectPoint: 'Point', searchDistance: 'Search distance', disability: 'Disabled',
+                paymentTitle: 'Subscription payment', paymentSubtitle: 'Choose a plan',
+                freeTrial: 'First day — free!<br>Then choose a suitable plan.',
+                monthlyTariff: 'Monthly subscription', monthlyDesc: 'Flexible — pay monthly, cancel anytime',
+                yearlyTariff: 'Yearly subscription', yearlyDesc: 'Save 25% — only 149.99 ₽ per month',
+                bestValue: 'Best value', perMonth: 'per month', perYear: 'per year',
+                cardDetails: 'Card details', securePayment: 'Secure payment · data protected',
+                paymentSuccessTitle: 'Payment successful!', paymentSuccessSubtitle: 'Subscription activated',
+                continue: 'Continue'
+            },
+            es: {
+                search: 'Buscar', currentLocation: 'Ubicación actual', currentLocationDesc: 'Tu posición actual',
+                emptyState: 'Añade puntos<br>para acceso rápido', addPoint: 'Añadir punto',
+                settings: 'Ajustes', support: 'Soporte', instruction: 'Instrucción',
+                instructionSoon: 'La instrucción estará aquí pronto',
+                theme: 'Tema', themeDark: 'Oscuro', themeLight: 'Claro', language: 'Idioma',
+                newPoint: 'Nuevo punto', editPoint: 'Editar punto',
+                name: 'Nombre', namePlaceholder: 'Por ejemplo: Casa',
+                address: 'Dirección', addressPlaceholder: 'Calle Ejemplo, 10',
+                cancel: 'Cancelar', savePoint: 'Guardar punto', saveChanges: 'Guardar cambios',
+                noResults: 'No se encontró nada', forQuery: 'para la consulta', noPoints: 'Sin puntos guardados',
+                free: 'Libre', occupied: 'Ocupado', yourCar: 'Tu coche',
+                show: 'Mostrar', hide: 'Ocultar', zone: 'Zona',
+                edit: 'Editar', delete: 'Eliminar',
+                chatPlaceholder: 'Escribe un mensaje...',
+                welcomeMessage: '¡Hola, somos la empresa RiTuI! 👋\n\nEste es el soporte técnico de GeoPark.\n\nCuéntame, ¿qué problema tienes? Intentaré ayudarte lo antes posible.',
+                today: 'Hoy',
+                carDimensions: 'Dimensiones del coche', width: 'Ancho', length: 'Largo',
+                selectPoint: 'Punto', searchDistance: 'Distancia de búsqueda', disability: 'Discapacitado',
+                paymentTitle: 'Pago de suscripción', paymentSubtitle: 'Elige un plan',
+                freeTrial: '¡Primer día gratis!<br>Luego elige un plan adecuado.',
+                monthlyTariff: 'Suscripción mensual', monthlyDesc: 'Flexible — paga mensualmente, cancela cuando quieras',
+                yearlyTariff: 'Suscripción anual', yearlyDesc: 'Ahorra 25% — solo 149,99 ₽ al mes',
+                bestValue: 'Mejor valor', perMonth: 'al mes', perYear: 'al año',
+                cardDetails: 'Datos de la tarjeta', securePayment: 'Pago seguro · datos protegidos',
+                paymentSuccessTitle: '¡Pago exitoso!', paymentSuccessSubtitle: 'Suscripción activada',
+                continue: 'Continuar'
+            },
+            zh: {
+                search: '搜索', currentLocation: '当前位置', currentLocationDesc: '您的当前位置',
+                emptyState: '添加地点<br>以便快速访问', addPoint: '添加地点',
+                settings: '设置', support: '技术支持', instruction: '说明',
+                instructionSoon: '说明即将推出',
+                theme: '主题', themeDark: '深色', themeLight: '浅色', language: '语言',
+                newPoint: '新地点', editPoint: '编辑地点',
+                name: '名称', namePlaceholder: '例如：家',
+                address: '地址', addressPlaceholder: '示例路10号',
+                cancel: '取消', savePoint: '保存地点', saveChanges: '保存更改',
+                noResults: '未找到结果', forQuery: '对于查询', noPoints: '暂无保存的地点',
+                free: '空闲', occupied: '已占用', yourCar: '您的车',
+                show: '显示', hide: '隐藏', zone: '区域',
+                edit: '编辑', delete: '删除',
+                chatPlaceholder: '输入消息...',
+                welcomeMessage: '您好，我们是RiTuiI公司！ 👋\n\n这是GeoPark技术支持。\n\n请告诉我您遇到了什么问题？我会尽快帮助您。',
+                today: '今天',
+                carDimensions: '汽车尺寸', width: '宽度', length: '长度',
+                selectPoint: '地点', searchDistance: '搜索距离', disability: '残疾',
+                paymentTitle: '订阅付款', paymentSubtitle: '选择套餐',
+                freeTrial: '第一天免费！<br>然后选择合适的套餐。',
+                monthlyTariff: '月度订阅', monthlyDesc: '灵活 — 按月付款，随时取消',
+                yearlyTariff: '年度订阅', yearlyDesc: '节省25% — 每月仅149.99 ₽',
+                bestValue: '最划算', perMonth: '每月', perYear: '每年',
+                cardDetails: '卡信息', securePayment: '安全支付 · 数据受保护',
+                paymentSuccessTitle: '支付成功！', paymentSuccessSubtitle: '订阅已激活',
+                continue: '继续'
+            },
+            hi: {
+                search: 'खोज', currentLocation: 'वर्तमान स्थान', currentLocationDesc: 'आपकी वर्तमान स्थिति',
+                emptyState: 'त्वरित पहुंच के लिए<br>बिंदु जोड़ें', addPoint: 'बिंदु जोड़ें',
+                settings: 'सेटिंग्स', support: 'सहायता', instruction: 'निर्देश',
+                instructionSoon: 'निर्देश जल्द ही यहाँ होंगे',
+                theme: 'थीम', themeDark: 'गहरा', themeLight: 'हल्का', language: 'भाषा',
+                newPoint: 'नया बिंदु', editPoint: 'बिंदु संपादित करें',
+                name: 'नाम', namePlaceholder: 'उदाहरण: घर',
+                address: 'पता', addressPlaceholder: 'उदाहरण सड़क, 10',
+                cancel: 'रद्द करें', savePoint: 'बिंदु सहेजें', saveChanges: 'परिवर्तन सहेजें',
+                noResults: 'कुछ नहीं मिला', forQuery: 'क्वेरी के लिए', noPoints: 'कोई सहेजे गए बिंदु नहीं',
+                free: 'खाली', occupied: 'व्यस्त', yourCar: 'आपकी कार',
+                show: 'दिखाएं', hide: 'छुपाएं', zone: 'क्षेत्र',
+                edit: 'संपादित', delete: 'हटाएं',
+                chatPlaceholder: 'संदेश लिखें...',
+                welcomeMessage: 'नमस्ते, हम RiTuI कंपनी हैं! 👋\n\nयह GeoPark तकनीकी सहायता है।\n\nकृपया बताएं आपको क्या समस्या है? मैं जल्द से जल्द मदद करने का प्रयास करूंगा।',
+                today: 'आज',
+                carDimensions: 'कार आयाम', width: 'चौड़ाई', length: 'लंबाई',
+                selectPoint: 'बिंदु', searchDistance: 'खोज दूरी', disability: 'विकलांग',
+                paymentTitle: 'सदस्यता भुगतान', paymentSubtitle: 'योजना चुनें',
+                freeTrial: 'पहला दिन मुफ्त!<br>फिर उपयुक्त योजना चुनें।',
+                monthlyTariff: 'मासिक सदस्यता', monthlyDesc: 'लचीला — मासिक भुगतान करें, कभी भी रद्द करें',
+                yearlyTariff: 'वार्षिक सदस्यता', yearlyDesc: '25% बचाएं — प्रति माह केवल 149.99 ₽',
+                bestValue: 'सर्वोत्तम मूल्य', perMonth: 'प्रति माह', perYear: 'प्रति वर्ष',
+                cardDetails: 'कार्ड विवरण', securePayment: 'सुरक्षित भुगतान · डेटा सुरक्षित',
+                paymentSuccessTitle: 'भुगतान सफल!', paymentSuccessSubtitle: 'सदस्यता सक्रिय',
+                continue: 'जारी रखें'
+            },
+            ar: {
+                search: 'بحث', currentLocation: 'الموقع الحالي', currentLocationDesc: 'موقعك الحالي',
+                emptyState: 'أضف نقاطًا<br>للوصول السريع', addPoint: 'إضافة نقطة',
+                settings: 'الإعدادات', support: 'الدعم', instruction: 'تعليمات',
+                instructionSoon: 'التعليمات ستكون هنا قريبًا',
+                theme: 'السمة', themeDark: 'داكن', themeLight: 'فاتح', language: 'اللغة',
+                newPoint: 'نقطة جديدة', editPoint: 'تعديل النقطة',
+                name: 'الاسم', namePlaceholder: 'مثال: المنزل',
+                address: 'العنوان', addressPlaceholder: 'شارع المثال، 10',
+                cancel: 'إلغاء', savePoint: 'حفظ النقطة', saveChanges: 'حفظ التغييرات',
+                noResults: 'لم يتم العثور على شيء', forQuery: 'للاستعلام', noPoints: 'لا توجد نقاط محفوظة',
+                free: 'متاح', occupied: 'مشغول', yourCar: 'سيارتك',
+                show: 'إظهار', hide: 'إخفاء', zone: 'منطقة',
+                edit: 'تعديل', delete: 'حذف',
+                chatPlaceholder: 'اكتب رسالة...',
+                welcomeMessage: 'مرحبًا، نحن شركة RiTuI! 👋\n\nهذا هو الدعم الفني لـ GeoPark.\n\nأخبرني من فضلك ما المشكلة التي تواجهها؟ سأحاول مساعدتك في أقرب وقت ممكن.',
+                today: 'اليوم',
+                carDimensions: 'أبعاد السيارة', width: 'العرض', length: 'الطول',
+                selectPoint: 'نقطة', searchDistance: 'مسافة البحث', disability: 'معاق',
+                paymentTitle: 'دفع الاشتراك', paymentSubtitle: 'اختر خطة',
+                freeTrial: 'اليوم الأول مجاني!<br>ثم اختر الخطة المناسبة.',
+                monthlyTariff: 'اشتراك شهري', monthlyDesc: 'مرن — ادفع شهريًا، ألغِ في أي وقت',
+                yearlyTariff: 'اشتراك سنوي', yearlyDesc: 'وفر 25% — فقط 149.99 ₽ شهريًا',
+                bestValue: 'أفضل قيمة', perMonth: 'شهريًا', perYear: 'سنويًا',
+                cardDetails: 'بيانات البطاقة', securePayment: 'دفع آمن · البيانات محمية',
+                paymentSuccessTitle: 'تم الدفع بنجاح!', paymentSuccessSubtitle: 'تم تفعيل الاشتراك',
+                continue: 'متابعة'
+            },
+            pt: {
+                search: 'Pesquisar', currentLocation: 'Localização atual', currentLocationDesc: 'Sua posição atual',
+                emptyState: 'Adicione pontos<br>para acesso rápido', addPoint: 'Adicionar ponto',
+                settings: 'Configurações', support: 'Suporte', instruction: 'Instrução',
+                instructionSoon: 'A instrução estará aqui em breve',
+                theme: 'Tema', themeDark: 'Escuro', themeLight: 'Claro', language: 'Idioma',
+                newPoint: 'Novo ponto', editPoint: 'Editar ponto',
+                name: 'Nome', namePlaceholder: 'Por exemplo: Casa',
+                address: 'Endereço', addressPlaceholder: 'Rua Exemplo, 10',
+                cancel: 'Cancelar', savePoint: 'Salvar ponto', saveChanges: 'Salvar alterações',
+                noResults: 'Nada encontrado', forQuery: 'para a consulta', noPoints: 'Nenhum ponto salvo',
+                free: 'Livre', occupied: 'Ocupado', yourCar: 'Seu carro',
+                show: 'Mostrar', hide: 'Ocultar', zone: 'Zona',
+                edit: 'Editar', delete: 'Excluir',
+                chatPlaceholder: 'Escreva uma mensagem...',
+                welcomeMessage: 'Olá, somos a empresa RiTuI! 👋\n\nEste é o suporte técnico do GeoPark.\n\nPor favor, me conte qual problema você está enfrentando? Tentarei ajudá-lo o mais rápido possível.',
+                today: 'Hoje',
+                carDimensions: 'Dimensões do carro', width: 'Largura', length: 'Comprimento',
+                selectPoint: 'Ponto', searchDistance: 'Distância de pesquisa', disability: 'Deficiente',
+                paymentTitle: 'Pagamento de assinatura', paymentSubtitle: 'Escolha um plano',
+                freeTrial: 'Primeiro dia grátis!<br>Depois escolha um plano adequado.',
+                monthlyTariff: 'Assinatura mensal', monthlyDesc: 'Flexível — pague mensalmente, cancele a qualquer momento',
+                yearlyTariff: 'Assinatura anual', yearlyDesc: 'Economize 25% — apenas 149,99 ₽ por mês',
+                bestValue: 'Melhor valor', perMonth: 'por mês', perYear: 'por ano',
+                cardDetails: 'Dados do cartão', securePayment: 'Pagamento seguro · dados protegidos',
+                paymentSuccessTitle: 'Pagamento bem-sucedido!', paymentSuccessSubtitle: 'Assinatura ativada',
+                continue: 'Continuar'
+            },
+            ja: {
+                search: '検索', currentLocation: '現在地', currentLocationDesc: 'あなたの現在位置',
+                emptyState: 'ポイントを追加して<br>クイックアクセス', addPoint: 'ポイントを追加',
+                settings: '設定', support: 'サポート', instruction: '説明',
+                instructionSoon: '説明は近日公開予定です',
+                theme: 'テーマ', themeDark: 'ダーク', themeLight: 'ライト', language: '言語',
+                newPoint: '新しいポイント', editPoint: 'ポイントを編集',
+                name: '名前', namePlaceholder: '例：自宅',
+                address: '住所', addressPlaceholder: '例路10',
+                cancel: 'キャンセル', savePoint: 'ポイントを保存', saveChanges: '変更を保存',
+                noResults: '見つかりません', forQuery: 'クエリ', noPoints: '保存されたポイントはありません',
+                free: '空き', occupied: '使用中', yourCar: 'あなたの車',
+                show: '表示', hide: '非表示', zone: 'ゾーン',
+                edit: '編集', delete: '削除',
+                chatPlaceholder: 'メッセージを書く...',
+                welcomeMessage: 'こんにちは、私たちはRiTuiI社です！ \n\nGeoParkのテクニカルサポートです。\n\nどのような問題に直面していますか？できるだけ早くお手伝いします。',
+                today: '今日',
+                carDimensions: '車の寸法', width: '幅', length: '長さ',
+                selectPoint: 'ポイント', searchDistance: '検索距離', disability: '障害者',
+                paymentTitle: 'サブスクリプション支払い', paymentSubtitle: 'プランを選択',
+                freeTrial: '初日無料！<br>その後、適切なプランを選択してください。',
+                monthlyTariff: '月額サブスクリプション', monthlyDesc: '柔軟 — 毎月支払い、いつでもキャンセル',
+                yearlyTariff: '年額サブスクリプション', yearlyDesc: '25%節約 — 月額わずか149.99₽',
+                bestValue: 'お得', perMonth: '月額', perYear: '年額',
+                cardDetails: 'カード情報', securePayment: '安全な支払い·データ保護',
+                paymentSuccessTitle: '支払い成功！', paymentSuccessSubtitle: 'サブスクリプションが有効化されました',
+                continue: '続ける'
+            },
+            de: {
+                search: 'Suche', currentLocation: 'Aktueller Standort', currentLocationDesc: 'Ihre aktuelle Position',
+                emptyState: 'Punkte hinzufügen<br>für schnellen Zugriff', addPoint: 'Punkt hinzufügen',
+                settings: 'Einstellungen', support: 'Support', instruction: 'Anleitung',
+                instructionSoon: 'Anleitung folgt in Kürze',
+                theme: 'Thema', themeDark: 'Dunkel', themeLight: 'Hell', language: 'Sprache',
+                newPoint: 'Neuer Punkt', editPoint: 'Punkt bearbeiten',
+                name: 'Name', namePlaceholder: 'Zum Beispiel: Zuhause',
+                address: 'Adresse', addressPlaceholder: 'Beispielstr. 10',
+                cancel: 'Abbrechen', savePoint: 'Punkt speichern', saveChanges: 'Änderungen speichern',
+                noResults: 'Nichts gefunden', forQuery: 'für Anfrage', noPoints: 'Keine gespeicherten Punkte',
+                free: 'Frei', occupied: 'Belegt', yourCar: 'Ihr Auto',
+                show: 'Anzeigen', hide: 'Ausblenden', zone: 'Zone',
+                edit: 'Bearbeiten', delete: 'Löschen',
+                chatPlaceholder: 'Nachricht schreiben...',
+                welcomeMessage: 'Hallo, wir sind die Firma RiTuI! 👋\n\nDies ist der GeoPark Technical Support.\n\nBitte erzählen Sie mir, welches Problem Sie haben? Ich werde versuchen, Ihnen so schnell wie möglich zu helfen.',
+                today: 'Heute',
+                carDimensions: 'Autoabmessungen', width: 'Breite', length: 'Länge',
+                selectPoint: 'Punkt', searchDistance: 'Suchentfernung', disability: 'Behindert',
+                paymentTitle: 'Abonnementzahlung', paymentSubtitle: 'Plan wählen',
+                freeTrial: 'Erster Tag kostenlos!<br>Wählen Sie dann einen passenden Plan.',
+                monthlyTariff: 'Monatsabonnement', monthlyDesc: 'Flexibel — monatliche Zahlung, jederzeit kündbar',
+                yearlyTariff: 'Jahresabonnement', yearlyDesc: 'Sparen Sie 25% — nur 149,99 ₽ pro Monat',
+                bestValue: 'Bestes Angebot', perMonth: 'pro Monat', perYear: 'pro Jahr',
+                cardDetails: 'Kartendaten', securePayment: 'Sichere Zahlung · Daten geschützt',
+                paymentSuccessTitle: 'Zahlung erfolgreich!', paymentSuccessSubtitle: 'Abonnement aktiviert',
+                continue: 'Weiter'
+            },
+            fr: {
+                search: 'Rechercher', currentLocation: 'Position actuelle', currentLocationDesc: 'Votre position actuelle',
+                emptyState: 'Ajoutez des points<br>pour un accès rapide', addPoint: 'Ajouter un point',
+                settings: 'Paramètres', support: 'Support', instruction: 'Instruction',
+                instructionSoon: 'L\'instruction sera bientôt disponible',
+                theme: 'Thème', themeDark: 'Sombre', themeLight: 'Clair', language: 'Langue',
+                newPoint: 'Nouveau point', editPoint: 'Modifier le point',
+                name: 'Nom', namePlaceholder: 'Par exemple : Maison',
+                address: 'Adresse', addressPlaceholder: 'Rue Exemple, 10',
+                cancel: 'Annuler', savePoint: 'Enregistrer le point', saveChanges: 'Enregistrer les modifications',
+                noResults: 'Aucun résultat', forQuery: 'pour la requête', noPoints: 'Aucun point enregistré',
+                free: 'Libre', occupied: 'Occupé', yourCar: 'Votre voiture',
+                show: 'Afficher', hide: 'Masquer', zone: 'Zone',
+                edit: 'Modifier', delete: 'Supprimer',
+                chatPlaceholder: 'Écrivez un message...',
+                welcomeMessage: 'Bonjour, nous sommes la société RiTuI ! 👋\n\nC\'est le support technique GeoPark.\n\nDites-moi quel problème vous rencontrez ? J\'essaierai de vous aider le plus rapidement possible.',
+                today: 'Aujourd\'hui',
+                carDimensions: 'Dimensions de la voiture', width: 'Largeur', length: 'Longueur',
+                selectPoint: 'Point', searchDistance: 'Distance de recherche', disability: 'Handicapé',
+                paymentTitle: 'Paiement d\'abonnement', paymentSubtitle: 'Choisissez un forfait',
+                freeTrial: 'Premier jour gratuit !<br>Choisissez ensuite un forfait adapté.',
+                monthlyTariff: 'Abonnement mensuel', monthlyDesc: 'Flexible — payez mensuellement, annulez à tout moment',
+                yearlyTariff: 'Abonnement annuel', yearlyDesc: 'Économisez 25% — seulement 149,99 ₽ par mois',
+                bestValue: 'Meilleur rapport qualité-prix', perMonth: 'par mois', perYear: 'par an',
+                cardDetails: 'Détails de la carte', securePayment: 'Paiement sécurisé · données protégées',
+                paymentSuccessTitle: 'Paiement réussi !', paymentSuccessSubtitle: 'Abonnement activé',
+                continue: 'Continuer'
+            }
         };
 
         function t(key) {
@@ -1106,9 +1305,10 @@
             document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.getAttribute('data-i18n-placeholder')); });
             document.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = t(el.getAttribute('data-i18n-title')); });
-            renderPoints();
-            renderDistanceLabels();
-            if (state.isMapVisible) updateMapInfo();
+            renderDropdownPoints();
+            renderSelectedPoint();
+            updateDistanceButtons();
+            updateMapInfo();
             const modalOverlay = document.getElementById('modalOverlay');
             if (modalOverlay.classList.contains('visible')) {
                 const modalTitle = document.getElementById('modalTitle');
@@ -1127,24 +1327,24 @@
 
         const state = {
             points: [], selectedId: 'current', isMapVisible: false,
-            isSettingsVisible: false, isChatVisible: false,
-            nextId: 1, searchQuery: '', editingPointId: null,
+            isSettingsVisible: false, isChatVisible: false, isInstructionVisible: false,
+            nextId: 1, editingPointId: null,
             theme: 'dark', language: 'ru',
             chatMessages: [],
             isPaid: false,
-            hasDiscount: false
+            carWidth: 1.8, carLength: 4.0,
+            searchDistance: 500,
+            disability: false,
+            tariff: 'monthly',
+            dropdownSearchQuery: ''
         };
 
-        const FULL_PRICE = '299,99 ₽';
-        const DISCOUNT_PRICE = '199,99 ₽';
+        const FULL_PRICE = '199,99 ₽';
+        const YEARLY_PRICE = '1 799,99 ₽';
+        const YEARLY_OLD_PRICE = '2 399,88 ₽';
 
-        const distances = [250, 500, 750, 1000];
-        let currentDistanceIndex = 1;
-
-        function getScrollbarThreshold() {
-            const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
-            return isMobile ? 4 : 3;
-        }
+        const widthOptions = [1.4, 1.5, 1.6, 1.7, 1.8, 1.85, 1.9, 1.95, 2.0, 2.05, 2.1, 2.2, 2.3, 2.5];
+        const lengthOptions = [3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6];
 
         const languages = [
             { code: 'ru', name: 'Русский', flag: '🇷🇺' },
@@ -1161,21 +1361,259 @@
 
         const mapState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0, minScale: 1, maxScale: 2.5 };
 
-        // ===== ОПЛАТА =====
+        function updateCarDimensions() {
+            const wIdx = parseInt(document.getElementById('carWidth').value);
+            const lIdx = parseInt(document.getElementById('carLength').value);
+            state.carWidth = widthOptions[wIdx];
+            state.carLength = lengthOptions[lIdx];
+            document.getElementById('carWidthValue').textContent = state.carWidth.toFixed(2) + ' м';
+            document.getElementById('carLengthValue').textContent = state.carLength.toFixed(2) + ' м';
+        }
+
+        function toggleDisability() {
+            state.disability = !state.disability;
+            document.getElementById('disabilityToggle').classList.toggle('active', state.disability);
+        }
+
+        function togglePointSelector(e) {
+            e.stopPropagation();
+            const selector = document.getElementById('pointSelector');
+            const isOpen = selector.classList.contains('open');
+            if (isOpen) {
+                closePointSelector();
+            } else {
+                selector.classList.add('open');
+                setTimeout(() => document.getElementById('dropdownSearch').focus(), 100);
+            }
+        }
+
+        function closePointSelector() {
+            document.getElementById('pointSelector').classList.remove('open');
+            document.getElementById('dropdownSearch').value = '';
+            state.dropdownSearchQuery = '';
+            renderDropdownPoints();
+        }
+
+        document.addEventListener('click', function(e) {
+            const selector = document.getElementById('pointSelector');
+            if (selector && !selector.contains(e.target)) {
+                closePointSelector();
+            }
+        });
+
+        function filterDropdownPoints() {
+            state.dropdownSearchQuery = document.getElementById('dropdownSearch').value.trim().toLowerCase();
+            renderDropdownPoints();
+        }
+
+        function renderDropdownPoints() {
+            const list = document.getElementById('dropdownPointsList');
+            const empty = document.getElementById('dropdownEmpty');
+            const currentItem = document.getElementById('dropdownCurrentItem');
+
+            currentItem.classList.toggle('active', state.selectedId === 'current');
+            currentItem.style.display = state.dropdownSearchQuery ? 'none' : 'flex';
+
+            list.innerHTML = '';
+
+            let filtered = state.points;
+            if (state.dropdownSearchQuery) {
+                filtered = state.points.filter(p =>
+                    p.name.toLowerCase().includes(state.dropdownSearchQuery) ||
+                    p.address.toLowerCase().includes(state.dropdownSearchQuery)
+                );
+            }
+
+            if (filtered.length === 0 && !state.dropdownSearchQuery) {
+                empty.style.display = 'block';
+            } else if (filtered.length === 0 && state.dropdownSearchQuery) {
+                empty.style.display = 'block';
+                empty.textContent = t('noResults');
+            } else {
+                empty.style.display = 'none';
+            }
+
+            filtered.forEach(point => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item' + (state.selectedId === point.id ? ' active' : '');
+                item.dataset.id = point.id;
+                item.innerHTML = `
+                    <div class="dropdown-item-indicator"></div>
+                    <div class="dropdown-item-info">
+                        <div class="dropdown-item-name">${escapeHtml(point.name)}</div>
+                        <div class="dropdown-item-addr">${escapeHtml(point.address)}</div>
+                    </div>
+                    <div class="dropdown-item-actions">
+                        <button class="dropdown-btn-edit" title="${t('edit')}"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button>
+                        <button class="dropdown-btn-delete" title="${t('delete')}"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
+                    </div>
+                `;
+                item.addEventListener('click', function(e) {
+                    if (e.target.closest('.dropdown-btn-edit')) {
+                        e.stopPropagation();
+                        closePointSelector();
+                        openModal(point.id);
+                        return;
+                    }
+                    if (e.target.closest('.dropdown-btn-delete')) {
+                        e.stopPropagation();
+                        deletePoint(point.id);
+                        return;
+                    }
+                    selectPoint(point.id);
+                });
+                list.appendChild(item);
+            });
+        }
+
+        function selectPoint(id) {
+            state.selectedId = id;
+            renderSelectedPoint();
+            renderDropdownPoints();
+            closePointSelector();
+            if (state.isMapVisible) updateMapInfo();
+        }
+
+        function renderSelectedPoint() {
+            const title = document.getElementById('selectedPointTitle');
+            const sub = document.getElementById('selectedPointSub');
+            if (state.selectedId === 'current') {
+                title.textContent = t('currentLocation');
+                sub.textContent = t('currentLocationDesc');
+            } else {
+                const point = state.points.find(p => p.id === state.selectedId);
+                if (point) {
+                    title.textContent = point.name;
+                    sub.textContent = point.address;
+                } else {
+                    state.selectedId = 'current';
+                    title.textContent = t('currentLocation');
+                    sub.textContent = t('currentLocationDesc');
+                }
+            }
+        }
+
+        function setDistance(dist) {
+            state.searchDistance = dist;
+            updateDistanceButtons();
+            if (state.isMapVisible) updateMapInfo();
+        }
+
+        function updateDistanceButtons() {
+            document.querySelectorAll('.distance-option').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.dist) === state.searchDistance);
+            });
+        }
+
+        function openModal(editId) {
+            state.editingPointId = editId || null;
+            const modalTitle = document.getElementById('modalTitle');
+            const btnSave = document.getElementById('btnSave');
+
+            if (state.editingPointId) {
+                const point = state.points.find(p => p.id === state.editingPointId);
+                if (!point) return;
+                modalTitle.textContent = t('editPoint');
+                btnSave.textContent = t('saveChanges');
+                document.getElementById('inputName').value = point.name;
+                document.getElementById('inputAddress').value = point.address;
+            } else {
+                modalTitle.textContent = t('newPoint');
+                btnSave.textContent = t('savePoint');
+                document.getElementById('inputName').value = '';
+                document.getElementById('inputAddress').value = '';
+            }
+
+            document.getElementById('modalOverlay').classList.add('visible');
+            updateCharCount();
+            updateSaveButton();
+            setTimeout(() => document.getElementById('inputName').focus(), 300);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('visible');
+            state.editingPointId = null;
+        }
+
+        function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+        function updateCharCount() {
+            document.getElementById('charCount').textContent = `${document.getElementById('inputName').value.length} / 100`;
+            updateSaveButton();
+        }
+
+        function updateSaveButton() {
+            const n = document.getElementById('inputName').value.trim();
+            const a = document.getElementById('inputAddress').value.trim();
+            document.getElementById('btnSave').disabled = !(n && a);
+        }
+
+        document.getElementById('inputAddress').addEventListener('input', updateSaveButton);
+
+        function savePoint() {
+            const name = document.getElementById('inputName').value.trim();
+            const address = document.getElementById('inputAddress').value.trim();
+            if (!name || !address) return;
+
+            if (state.editingPointId) {
+                const point = state.points.find(p => p.id === state.editingPointId);
+                if (point) {
+                    point.name = name;
+                    point.address = address;
+                }
+            } else {
+                state.points.push({
+                    id: 'point_' + state.nextId++, name, address,
+                    status: 'active'
+                });
+            }
+            closeModal();
+            renderDropdownPoints();
+            renderSelectedPoint();
+        }
+
+        function deletePoint(pointId) {
+            state.points = state.points.filter(p => p.id !== pointId);
+            if (state.selectedId === pointId) {
+                state.selectedId = 'current';
+            }
+            renderDropdownPoints();
+            renderSelectedPoint();
+            if (state.isMapVisible) updateMapInfo();
+        }
+
+        function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
+
         function openPayment() {
             document.getElementById('paymentFormContent').style.display = 'block';
             document.getElementById('paymentSuccess').classList.remove('visible');
             document.getElementById('cardNumber').value = '';
             document.getElementById('cardExpiry').value = '';
             document.getElementById('cardCvc').value = '';
-            if (!state.hasDiscount) {
-                resetDiscountUI();
-            }
+            selectTariff('monthly');
             document.getElementById('paymentOverlay').classList.add('visible');
         }
 
         function closePayment() {
             document.getElementById('paymentOverlay').classList.remove('visible');
+        }
+
+        function selectTariff(tariff) {
+            state.tariff = tariff;
+            document.querySelectorAll('.tariff-card').forEach(card => {
+                card.classList.toggle('selected', card.dataset.tariff === tariff);
+            });
+            updatePayButton();
+        }
+
+        function updatePayButton() {
+            const btn = document.getElementById('btnPay');
+            if (!btn) return;
+            if (state.tariff === 'yearly') {
+                btn.textContent = 'Оплатить ' + YEARLY_PRICE;
+            } else {
+                btn.textContent = 'Оплатить ' + FULL_PRICE;
+            }
         }
 
         function formatCardNumber(input) {
@@ -1188,58 +1626,6 @@
             let v = input.value.replace(/\D/g, '').substring(0, 4);
             if (v.length >= 2) v = v.substring(0, 2) + '/' + v.substring(2);
             input.value = v;
-        }
-
-        function confirmGosuslugi() {
-            const btn = document.getElementById('btnGosuslugi');
-            if (btn.classList.contains('loading') || state.hasDiscount) return;
-
-            btn.classList.add('loading');
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.classList.remove('loading');
-                btn.disabled = false;
-                state.hasDiscount = true;
-
-                const textEl = btn.querySelector('.btn-gosuslugi-text');
-                textEl.textContent = t('gosuslugiConfirmed');
-
-                applyDiscount();
-            }, 1500);
-        }
-
-        function applyDiscount() {
-            document.getElementById('oldPriceInline').style.display = 'inline';
-            document.getElementById('oldDiscountPrice').style.display = 'inline';
-            document.getElementById('currentPrice').textContent = DISCOUNT_PRICE;
-            document.getElementById('discountPrice').textContent = DISCOUNT_PRICE + '/мес';
-            updatePayButton();
-        }
-
-        function resetDiscountUI() {
-            document.getElementById('oldPriceInline').style.display = 'none';
-            document.getElementById('oldDiscountPrice').style.display = 'none';
-            document.getElementById('currentPrice').textContent = FULL_PRICE;
-            document.getElementById('discountPrice').textContent = '199,99 ₽/мес';
-
-            const btn = document.getElementById('btnGosuslugi');
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            const textEl = btn.querySelector('.btn-gosuslugi-text');
-            textEl.textContent = t('confirmGosuslugi');
-
-            updatePayButton();
-        }
-
-        function updatePayButton() {
-            const btn = document.getElementById('btnPay');
-            if (!btn) return;
-            if (state.hasDiscount) {
-                btn.textContent = t('payButtonDiscount');
-            } else {
-                btn.textContent = t('payButton');
-            }
         }
 
         function processPayment() {
@@ -1274,6 +1660,7 @@
         function openSettings() {
             if (state.isMapVisible) closeMapView();
             if (state.isChatVisible) closeChat();
+            if (state.isInstructionVisible) closeInstruction();
             state.isSettingsVisible = true;
             document.getElementById('pointsView').classList.add('hidden');
             document.getElementById('settingsView').classList.add('visible');
@@ -1316,6 +1703,23 @@
             });
         }
 
+        function openInstruction() {
+            if (state.isMapVisible) closeMapView();
+            if (state.isChatVisible) closeChat();
+            if (state.isSettingsVisible) closeSettings();
+            state.isInstructionVisible = true;
+            document.getElementById('pointsView').classList.add('hidden');
+            document.getElementById('instructionView').classList.add('visible');
+            document.getElementById('footer').classList.add('hidden');
+        }
+
+        function closeInstruction() {
+            state.isInstructionVisible = false;
+            document.getElementById('instructionView').classList.remove('visible');
+            document.getElementById('pointsView').classList.remove('hidden');
+            document.getElementById('footer').classList.remove('hidden');
+        }
+
         function formatTime(timestamp) {
             const d = new Date(timestamp);
             return d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
@@ -1324,6 +1728,7 @@
         function openChat() {
             if (state.isMapVisible) closeMapView();
             if (state.isSettingsVisible) closeSettings();
+            if (state.isInstructionVisible) closeInstruction();
             state.isChatVisible = true;
             document.getElementById('pointsView').classList.add('hidden');
             document.getElementById('chatView').classList.add('visible');
@@ -1411,343 +1816,6 @@
             }
         });
 
-        function onSearchInput() {
-            const input = document.getElementById('searchInput');
-            const clearBtn = document.getElementById('searchClear');
-            state.searchQuery = input.value.trim().toLowerCase();
-            clearBtn.classList.toggle('visible', input.value.length > 0);
-            renderPoints();
-        }
-
-        function clearSearch() {
-            document.getElementById('searchInput').value = '';
-            state.searchQuery = '';
-            document.getElementById('searchClear').classList.remove('visible');
-            renderPoints();
-            document.getElementById('searchInput').focus();
-        }
-
-        function getFilteredPoints() {
-            if (!state.searchQuery) return state.points;
-            return state.points.filter(p =>
-                p.name.toLowerCase().includes(state.searchQuery) ||
-                p.address.toLowerCase().includes(state.searchQuery)
-            );
-        }
-
-        function highlightText(text, query) {
-            if (!query) return escapeHtml(text);
-            const i = text.toLowerCase().indexOf(query.toLowerCase());
-            if (i === -1) return escapeHtml(text);
-            return escapeHtml(text.substring(0, i)) + '<span class="highlight">' + escapeHtml(text.substring(i, i + query.length)) + '</span>' + escapeHtml(text.substring(i + query.length));
-        }
-
-        function openModal(editId) {
-            state.editingPointId = editId || null;
-            const modalTitle = document.getElementById('modalTitle');
-            const btnSave = document.getElementById('btnSave');
-
-            if (state.editingPointId) {
-                const point = state.points.find(p => p.id === state.editingPointId);
-                if (!point) return;
-                modalTitle.textContent = t('editPoint');
-                btnSave.textContent = t('saveChanges');
-                document.getElementById('inputName').value = point.name;
-                document.getElementById('inputAddress').value = point.address;
-                currentDistanceIndex = distances.indexOf(point.distance);
-                if (currentDistanceIndex === -1) currentDistanceIndex = 1;
-            } else {
-                modalTitle.textContent = t('newPoint');
-                btnSave.textContent = t('savePoint');
-                document.getElementById('inputName').value = '';
-                document.getElementById('inputAddress').value = '';
-                currentDistanceIndex = 1;
-            }
-
-            document.getElementById('modalOverlay').classList.add('visible');
-            updateDistanceUI(); updateCharCount(); updateSaveButton();
-            setTimeout(() => document.getElementById('inputName').focus(), 300);
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('visible');
-            state.editingPointId = null;
-        }
-
-        function handleOverlayClick(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
-
-        function updateCharCount() {
-            document.getElementById('charCount').textContent = `${document.getElementById('inputName').value.length} / 100`;
-            updateSaveButton();
-        }
-
-        function updateSaveButton() {
-            const n = document.getElementById('inputName').value.trim();
-            const a = document.getElementById('inputAddress').value.trim();
-            document.getElementById('btnSave').disabled = !(n && a);
-        }
-
-        document.getElementById('inputAddress').addEventListener('input', updateSaveButton);
-
-        function setDistance(index) { currentDistanceIndex = index; updateDistanceUI(); }
-
-        function getDistanceLabels() {
-            const map = {
-                ru: ['250 м', '500 м', '750 м', '1 км'], en: ['250 m', '500 m', '750 m', '1 km'],
-                es: ['250 m', '500 m', '750 m', '1 km'], zh: ['250米', '500米', '750米', '1公里'],
-                hi: ['250 मी', '500 मी', '750 मी', '1 किमी'], ar: ['٢٥٠ م', '٥٠٠ م', '٧٥٠ م', ' كم'],
-                pt: ['250 m', '500 m', '750 m', '1 km'], ja: ['250m', '500m', '750m', '1km'],
-                de: ['250 m', '500 m', '750 m', '1 km'], fr: ['250 m', '500 m', '750 m', '1 km']
-            };
-            return map[state.language] || map.ru;
-        }
-
-        function getDistanceValueLabel() { return getDistanceLabels()[currentDistanceIndex]; }
-
-        function renderDistanceLabels() {
-            const container = document.getElementById('distanceLabels');
-            const labels = getDistanceLabels();
-            container.innerHTML = '';
-            labels.forEach((lbl, i) => {
-                const span = document.createElement('span');
-                span.className = 'distance-label' + (i === currentDistanceIndex ? ' active' : '');
-                span.textContent = lbl;
-                span.onclick = () => setDistance(i);
-                container.appendChild(span);
-            });
-        }
-
-        function updateDistanceUI() {
-            const thumb = document.getElementById('distanceThumb');
-            const fill = document.getElementById('distanceFill');
-            const track = document.querySelector('.distance-track');
-            const tw = track.offsetWidth;
-            thumb.style.left = ((currentDistanceIndex / 3) * tw) + 'px';
-            fill.style.width = ((currentDistanceIndex / 3) * 100) + '%';
-            document.querySelectorAll('.distance-label').forEach((l, i) => l.classList.toggle('active', i === currentDistanceIndex));
-            document.querySelectorAll('.distance-dot').forEach((d, i) => d.classList.toggle('active', i <= currentDistanceIndex));
-            document.getElementById('distanceValue').textContent = getDistanceValueLabel();
-        }
-
-        (function initSliderDrag() {
-            const thumb = document.getElementById('distanceThumb');
-            const track = document.querySelector('.distance-track');
-            let dragging = false;
-
-            function start(e) { dragging = true; e.preventDefault(); try { thumb.setPointerCapture(e.pointerId); } catch(_) {} }
-            function move(e) {
-                if (!dragging) return;
-                const rect = track.getBoundingClientRect();
-                const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                const idx = Math.round(pct * 3);
-                if (idx !== currentDistanceIndex) { currentDistanceIndex = idx; updateDistanceUI(); }
-            }
-            function end() { dragging = false; }
-
-            thumb.addEventListener('pointerdown', start);
-            document.addEventListener('pointermove', move);
-            document.addEventListener('pointerup', end);
-            document.addEventListener('pointercancel', end);
-        })();
-
-        function savePoint() {
-            const name = document.getElementById('inputName').value.trim();
-            const address = document.getElementById('inputAddress').value.trim();
-            if (!name || !address) return;
-
-            const distLabels = getDistanceLabels();
-
-            if (state.editingPointId) {
-                const point = state.points.find(p => p.id === state.editingPointId);
-                if (point) {
-                    point.name = name; point.address = address;
-                    point.distance = distances[currentDistanceIndex];
-                    point.distanceLabel = distLabels[currentDistanceIndex];
-                }
-            } else {
-                state.points.push({
-                    id: 'point_' + state.nextId++, name, address,
-                    distance: distances[currentDistanceIndex],
-                    distanceLabel: distLabels[currentDistanceIndex],
-                    status: 'active'
-                });
-            }
-            closeModal(); renderPoints();
-        }
-
-        function deletePoint(pointId) {
-            const item = document.querySelector(`.point-item[data-id="${pointId}"]`);
-            if (item) {
-                item.classList.add('deleting');
-                setTimeout(() => {
-                    state.points = state.points.filter(p => p.id !== pointId);
-                    if (state.selectedId === pointId) state.selectedId = 'current';
-                    renderPoints();
-                }, 300);
-            }
-        }
-
-        function updateSelectionVisuals() {
-            document.querySelectorAll('.point-item').forEach(item => {
-                const point = state.points.find(p => p.id === item.dataset.id);
-                if (!point) return;
-                const indicator = item.querySelector('.point-indicator');
-                if (point.status === 'selected') {
-                    item.classList.add('selected');
-                    indicator.classList.remove('circle-empty'); indicator.classList.add('circle-filled');
-                } else {
-                    item.classList.remove('selected');
-                    indicator.classList.remove('circle-filled'); indicator.classList.add('circle-empty');
-                }
-            });
-            document.getElementById('currentIndicator').classList.toggle('filled', state.selectedId === 'current');
-        }
-
-        function renderPoints() {
-            const list = document.getElementById('pointsList');
-            const empty = document.getElementById('emptyState');
-            const currentLocation = document.getElementById('currentLocation');
-
-            list.querySelectorAll('.point-item, .no-results').forEach(el => el.remove());
-
-            const filtered = getFilteredPoints();
-            const isSearching = state.searchQuery.length > 0;
-
-            currentLocation.style.display = isSearching ? 'none' : 'flex';
-
-            if (state.points.length === 0 && !isSearching) {
-                empty.style.display = 'flex';
-                updateScrollbar(); return;
-            }
-
-            empty.style.display = 'none';
-
-            if (isSearching && filtered.length === 0) {
-                const nr = document.createElement('div');
-                nr.className = 'no-results';
-                nr.innerHTML = `<div class="no-results-icon"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div><p>${t('noResults')}<br>${t('forQuery')} <span class="search-term">«${escapeHtml(state.searchQuery)}»</span></p>`;
-                list.appendChild(nr);
-                updateScrollbar(); return;
-            }
-
-            filtered.forEach(point => {
-                const item = document.createElement('div');
-                item.className = 'item point-item' + (point.status === 'selected' ? ' selected' : '');
-                item.dataset.id = point.id;
-                const ic = point.status === 'selected' ? 'point-indicator circle-filled' : 'point-indicator circle-empty';
-                item.innerHTML = `
-                    <div class="${ic}" data-action="indicator"></div>
-                    <div class="item-info">
-                        <div class="item-name">${highlightText(point.name, state.searchQuery)}</div>
-                        <div class="item-addr">${highlightText(point.address, state.searchQuery)}</div>
-                        <div class="item-dist">📍 ${point.distanceLabel}</div>
-                    </div>
-                    <div class="point-actions">
-                        <button class="btn-edit" data-action="edit" title="${t('edit')}"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button>
-                        <button class="btn-delete" data-action="delete" title="${t('delete')}"><svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
-                    </div>
-                `;
-                item.querySelector('[data-action="indicator"]').addEventListener('click', e => { e.stopPropagation(); handleIndicatorClick(point.id); });
-                item.querySelector('[data-action="edit"]').addEventListener('click', e => { e.stopPropagation(); openModal(point.id); });
-                item.querySelector('[data-action="delete"]').addEventListener('click', e => { e.stopPropagation(); deletePoint(point.id); });
-                list.appendChild(item);
-            });
-
-            updateCurrentIndicator();
-            updateScrollbar();
-        }
-
-        function escapeHtml(text) { const d = document.createElement('div'); d.textContent = text; return d.innerHTML; }
-
-        function handleIndicatorClick(pointId) {
-            const point = state.points.find(p => p.id === pointId);
-            if (!point) return;
-            if (point.status === 'selected') {
-                point.status = 'active'; state.selectedId = 'current';
-            } else {
-                state.points.forEach(p => { if (p.status === 'selected') p.status = 'active'; });
-                point.status = 'selected'; state.selectedId = pointId;
-            }
-            updateSelectionVisuals();
-        }
-
-        function selectCurrent() {
-            state.points.forEach(p => { if (p.status === 'selected') p.status = 'active'; });
-            state.selectedId = 'current';
-            updateSelectionVisuals();
-        }
-
-        function updateCurrentIndicator() {
-            document.getElementById('currentIndicator').classList.toggle('filled', state.selectedId === 'current');
-        }
-
-        function updateScrollbar() {
-            const list = document.getElementById('pointsList');
-            const scrollbar = document.getElementById('customScrollbar');
-            const filtered = getFilteredPoints();
-            const threshold = getScrollbarThreshold();
-            if (list.scrollHeight > list.clientHeight && filtered.length > threshold) {
-                scrollbar.classList.add('visible');
-                requestAnimationFrame(updateThumbPosition);
-            } else {
-                scrollbar.classList.remove('visible');
-            }
-        }
-
-        function updateThumbPosition() {
-            const list = document.getElementById('pointsList');
-            const scrollbar = document.getElementById('customScrollbar');
-            const thumb = document.getElementById('customScrollbarThumb');
-            const scrollRange = list.scrollHeight - list.clientHeight;
-            if (scrollRange <= 0) return;
-            const trackH = scrollbar.getBoundingClientRect().height;
-            if (trackH <= 0) return;
-            const thumbH = Math.max(24, (list.clientHeight / list.scrollHeight) * trackH);
-            const ratio = list.scrollTop / scrollRange;
-            thumb.style.height = thumbH + 'px';
-            thumb.style.top = Math.max(0, ratio * (trackH - thumbH)) + 'px';
-        }
-
-        (function initScrollbarDrag() {
-            const list = document.getElementById('pointsList');
-            const scrollbar = document.getElementById('customScrollbar');
-            const thumb = document.getElementById('customScrollbarThumb');
-            let dragging = false, grabOffsetY = 0, activePointerId = null;
-
-            function startDrag(e) {
-                dragging = true;
-                activePointerId = e.pointerId;
-                grabOffsetY = e.clientY - thumb.getBoundingClientRect().top;
-                try { thumb.setPointerCapture(e.pointerId); } catch(_) {}
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            function onDrag(e) {
-                if (!dragging || e.pointerId !== activePointerId) return;
-                const scrollbarRect = scrollbar.getBoundingClientRect();
-                const thumbH = thumb.getBoundingClientRect().height;
-                const trackH = scrollbarRect.height;
-                const maxTop = trackH - thumbH;
-                let newTop = e.clientY - scrollbarRect.top - grabOffsetY;
-                newTop = Math.max(0, Math.min(maxTop, newTop));
-                const scrollRatio = maxTop > 0 ? newTop / maxTop : 0;
-                list.scrollTop = scrollRatio * (list.scrollHeight - list.clientHeight);
-            }
-
-            function endDrag(e) {
-                if (e && e.pointerId !== activePointerId) return;
-                dragging = false;
-                activePointerId = null;
-            }
-
-            thumb.addEventListener('pointerdown', startDrag);
-            document.addEventListener('pointermove', onDrag);
-            document.addEventListener('pointerup', endDrag);
-            document.addEventListener('pointercancel', endDrag);
-            list.addEventListener('scroll', () => { if (!dragging) updateThumbPosition(); });
-        })();
-
         function closeMapView() {
             const pv = document.getElementById('pointsView');
             const mc = document.getElementById('mapContainer');
@@ -1762,12 +1830,6 @@
             document.getElementById('legend').classList.remove('visible');
             btn.classList.remove('active');
             if (span) span.textContent = t('show');
-
-            if (state.selectedId !== 'current') {
-                const idx = state.points.findIndex(p => p.id === state.selectedId);
-                if (idx > 0) { const [pt] = state.points.splice(idx, 1); state.points.unshift(pt); }
-            }
-            renderPoints();
         }
 
         function toggleMap(force) {
@@ -1794,7 +1856,8 @@
             document.getElementById('legend').classList.add('visible');
             btn.classList.add('active');
             if (span) span.textContent = t('hide');
-            updateMapInfo(); resetMap();
+            updateMapInfo();
+            resetMap();
         }
 
         function updateMapInfo() {
@@ -1802,26 +1865,34 @@
             const s = document.getElementById('mapInfoSub');
             if (state.selectedId === 'current') {
                 tt.textContent = t('currentLocation');
-                s.textContent = `${t('zone')}: 500 м`;
             } else {
                 const p = state.points.find(p => p.id === state.selectedId);
-                if (p) { tt.textContent = p.name; s.textContent = `${t('zone')}: ${p.distanceLabel}`; }
+                if (p) {
+                    tt.textContent = p.name;
+                } else {
+                    tt.textContent = t('currentLocation');
+                }
             }
+            const distLabel = state.searchDistance === 1000 ? '1 км' : state.searchDistance + ' м';
+            s.textContent = `${t('zone')}: ${distLabel}`;
             calculateMinScale();
         }
 
         function calculateMinScale() {
             const w = document.getElementById('mapWrapper');
             const r = w.getBoundingClientRect();
-            const sa = 360 / 480, wa = r.width / r.height;
-            mapState.minScale = Math.max(1, wa > sa ? r.height / 480 : r.width / 360);
+            const img = document.getElementById('mapImage');
+            const iw = img.naturalWidth || 360;
+            const ih = img.naturalHeight || 480;
+            const sa = iw / ih, wa = r.width / r.height;
+            mapState.minScale = Math.max(1, wa > sa ? r.height / ih : r.width / iw);
             mapState.maxScale = mapState.minScale + 2;
         }
 
         const mapWrapper = document.getElementById('mapWrapper');
-        const mapSvg = document.getElementById('mapSvg');
+        const mapImage = document.getElementById('mapImage');
 
-        function updateMapTransform() { mapSvg.style.transform = `translate(${mapState.x}px, ${mapState.y}px) scale(${mapState.scale})`; }
+        function updateMapTransform() { mapImage.style.transform = `translate(${mapState.x}px, ${mapState.y}px) scale(${mapState.scale})`; }
 
         mapWrapper.addEventListener('mousedown', e => {
             if (e.target.closest('.map-controls, .legend, .map-info')) return;
@@ -1882,7 +1953,10 @@
 
         function constrainPan() {
             const r = document.getElementById('mapWrapper').getBoundingClientRect();
-            const sw = 360 * mapState.scale, sh = 480 * mapState.scale;
+            const img = document.getElementById('mapImage');
+            const iw = img.naturalWidth || 360;
+            const ih = img.naturalHeight || 480;
+            const sw = iw * mapState.scale, sh = ih * mapState.scale;
             const mx = Math.max(0, (sw - r.width) / 2), my = Math.max(0, (sh - r.height) / 2);
             mapState.x = Math.max(-mx, Math.min(mx, mapState.x));
             mapState.y = Math.max(-my, Math.min(my, mapState.y));
@@ -1892,22 +1966,22 @@
         function zoomOut() { setScale(mapState.scale - 0.2); updateMapTransform(); }
         function resetMap() { calculateMinScale(); mapState.scale = mapState.minScale; mapState.x = 0; mapState.y = 0; updateMapTransform(); }
 
-        renderLanguages();
-        renderDistanceLabels();
-        renderPoints();
-        applyLanguage();
-        setTimeout(updateDistanceUI, 100);
-
-        window.addEventListener('resize', () => {
-            updateDistanceUI();
-            updateScrollbar();
-            if (state.isMapVisible) { calculateMinScale(); constrainPan(); updateMapTransform(); }
+        // Ждём загрузки картинки, чтобы правильно рассчитать зум
+        mapImage.addEventListener('load', () => {
+            if (state.isMapVisible) { calculateMinScale(); resetMap(); }
         });
 
-        if (window.matchMedia) {
-            window.matchMedia('(pointer: coarse)').addEventListener?.('change', updateScrollbar);
-            window.matchMedia('(max-width: 768px)').addEventListener?.('change', updateScrollbar);
-        }
+        renderLanguages();
+        renderDropdownPoints();
+        renderSelectedPoint();
+        updateDistanceButtons();
+        updateCarDimensions();
+        updatePayButton();
+        applyLanguage();
+
+        window.addEventListener('resize', () => {
+            if (state.isMapVisible) { calculateMinScale(); constrainPan(); updateMapTransform(); }
+        });
     </script>
 </body>
 </html>
