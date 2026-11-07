@@ -525,9 +525,14 @@
         /* ===== MAP (ОБНОВЛЕНО ПОД PNG) ===== */
         .map-container { position: absolute; inset: 0; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; overflow: hidden; background: #0d1b2a; }
         .map-container.visible { opacity: 1; transform: scale(1); pointer-events: all; }
-        .map-wrapper { width: 100%; height: 100%; cursor: grab; overflow: hidden; }
+        .map-wrapper {
+            width: 100%; height: 100%; cursor: grab; overflow: hidden;
+            touch-action: none;
+            -webkit-user-select: none; user-select: none;
+            -webkit-touch-callout: none;
+        }
         .map-wrapper:active { cursor: grabbing; }
-        
+
         /* Новый стиль для картинки */
         .map-wrapper #mapImage {
             width: 100%; height: 100%;
@@ -536,7 +541,10 @@
             transition: transform 0.1s ease-out;
             user-select: none;
             -webkit-user-drag: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             pointer-events: none;
+            -webkit-touch-callout: none;
         }
 
         .map-controls { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 4px; opacity: 0; transition: opacity 0.4s ease 0.3s; }
@@ -822,6 +830,10 @@
                         <span class="toggle-label" data-i18n="disability">Инвалид</span>
                         <div class="toggle-switch" id="disabilityToggle" onclick="toggleDisability()"></div>
                     </div>
+                    <div class="toggle-row">
+                        <span class="toggle-label" data-i18n="barrier">Шлагбаум</span>
+                        <div class="toggle-switch" id="barrierToggle" onclick="toggleBarrier()"></div>
+                    </div>
                 </div>
             </div>
 
@@ -891,7 +903,8 @@
             <div class="map-container" id="mapContainer">
                 <div class="map-wrapper" id="mapWrapper">
                     <!-- Твоя картинка -->
-                    <img id="mapImage" src="Карта-1.png" alt="Карта" draggable="false">
+                    <img id="mapImage" src="Карта-1.png" alt="Карта" draggable="false"
+                         ondragstart="return false;" onmousedown="return false;">
                 </div>
                 <div class="map-info" id="mapInfo">
                     <div class="map-info-title" id="mapInfoTitle">Текущее местоположение</div>
@@ -932,7 +945,7 @@
 
                     <div class="free-trial-banner">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        <div class="free-trial-banner-text" data-i18n="freeTrial">Первый день — бесплатно!<br>Затем выберите подходящий тариф.</div>
+                        <div class="free-trial-banner-text" data-i18n-html="freeTrial">Первый день — бесплатно!<br>Затем выберите подходящий тариф.</div>
                     </div>
 
                     <div class="tariff-options" id="tariffOptions">
@@ -1031,7 +1044,7 @@
                 welcomeMessage: 'Здравствуйте, мы компания РиТуИ! 👋\n\nЭто техническая поддержка ГеоПарк.\n\nРасскажите, пожалуйста, с какой проблемой вы столкнулись? Я постараюсь помочь вам как можно скорее.',
                 today: 'Сегодня',
                 carDimensions: 'Габариты автомобиля', width: 'Ширина', length: 'Длина',
-                selectPoint: 'Точка', searchDistance: 'Дистанция поиска', disability: 'Инвалид',
+                selectPoint: 'Точка', searchDistance: 'Дистанция поиска', disability: 'Инвалид', barrier: 'Шлагбаум',
                 paymentTitle: 'Оплата подписки', paymentSubtitle: 'Выберите тариф',
                 freeTrial: 'Первый день — бесплатно!<br>Затем выберите подходящий тариф.',
                 monthlyTariff: 'Месячная подписка', monthlyDesc: 'Гибкость — оплата каждый месяц, отмена в любое время',
@@ -1059,7 +1072,7 @@
                 welcomeMessage: 'Hello, we are RiTuI company! 👋\n\nThis is GeoPark technical support.\n\nPlease tell me what problem you\'re facing? I\'ll try to help you as soon as possible.',
                 today: 'Today',
                 carDimensions: 'Car dimensions', width: 'Width', length: 'Length',
-                selectPoint: 'Point', searchDistance: 'Search distance', disability: 'Disabled',
+                selectPoint: 'Point', searchDistance: 'Search distance', disability: 'Disabled', barrier: 'Barrier',
                 paymentTitle: 'Subscription payment', paymentSubtitle: 'Choose a plan',
                 freeTrial: 'First day — free!<br>Then choose a suitable plan.',
                 monthlyTariff: 'Monthly subscription', monthlyDesc: 'Flexible — pay monthly, cancel anytime',
@@ -1087,7 +1100,7 @@
                 welcomeMessage: '¡Hola, somos la empresa RiTuI! 👋\n\nEste es el soporte técnico de GeoPark.\n\nCuéntame, ¿qué problema tienes? Intentaré ayudarte lo antes posible.',
                 today: 'Hoy',
                 carDimensions: 'Dimensiones del coche', width: 'Ancho', length: 'Largo',
-                selectPoint: 'Punto', searchDistance: 'Distancia de búsqueda', disability: 'Discapacitado',
+                selectPoint: 'Punto', searchDistance: 'Distancia de búsqueda', disability: 'Discapacitado', barrier: 'Barrera',
                 paymentTitle: 'Pago de suscripción', paymentSubtitle: 'Elige un plan',
                 freeTrial: '¡Primer día gratis!<br>Luego elige un plan adecuado.',
                 monthlyTariff: 'Suscripción mensual', monthlyDesc: 'Flexible — paga mensualmente, cancela cuando quieras',
@@ -1115,7 +1128,7 @@
                 welcomeMessage: '您好，我们是RiTuiI公司！ 👋\n\n这是GeoPark技术支持。\n\n请告诉我您遇到了什么问题？我会尽快帮助您。',
                 today: '今天',
                 carDimensions: '汽车尺寸', width: '宽度', length: '长度',
-                selectPoint: '地点', searchDistance: '搜索距离', disability: '残疾',
+                selectPoint: '地点', searchDistance: '搜索距离', disability: '残疾', barrier: '道闸',
                 paymentTitle: '订阅付款', paymentSubtitle: '选择套餐',
                 freeTrial: '第一天免费！<br>然后选择合适的套餐。',
                 monthlyTariff: '月度订阅', monthlyDesc: '灵活 — 按月付款，随时取消',
@@ -1143,7 +1156,7 @@
                 welcomeMessage: 'नमस्ते, हम RiTuI कंपनी हैं! 👋\n\nयह GeoPark तकनीकी सहायता है।\n\nकृपया बताएं आपको क्या समस्या है? मैं जल्द से जल्द मदद करने का प्रयास करूंगा।',
                 today: 'आज',
                 carDimensions: 'कार आयाम', width: 'चौड़ाई', length: 'लंबाई',
-                selectPoint: 'बिंदु', searchDistance: 'खोज दूरी', disability: 'विकलांग',
+                selectPoint: 'बिंदु', searchDistance: 'खोज दूरी', disability: 'विकलांग', barrier: 'अवरोध',
                 paymentTitle: 'सदस्यता भुगतान', paymentSubtitle: 'योजना चुनें',
                 freeTrial: 'पहला दिन मुफ्त!<br>फिर उपयुक्त योजना चुनें।',
                 monthlyTariff: 'मासिक सदस्यता', monthlyDesc: 'लचीला — मासिक भुगतान करें, कभी भी रद्द करें',
@@ -1171,7 +1184,7 @@
                 welcomeMessage: 'مرحبًا، نحن شركة RiTuI! 👋\n\nهذا هو الدعم الفني لـ GeoPark.\n\nأخبرني من فضلك ما المشكلة التي تواجهها؟ سأحاول مساعدتك في أقرب وقت ممكن.',
                 today: 'اليوم',
                 carDimensions: 'أبعاد السيارة', width: 'العرض', length: 'الطول',
-                selectPoint: 'نقطة', searchDistance: 'مسافة البحث', disability: 'معاق',
+                selectPoint: 'نقطة', searchDistance: 'مسافة البحث', disability: 'معاق', barrier: 'حاجز',
                 paymentTitle: 'دفع الاشتراك', paymentSubtitle: 'اختر خطة',
                 freeTrial: 'اليوم الأول مجاني!<br>ثم اختر الخطة المناسبة.',
                 monthlyTariff: 'اشتراك شهري', monthlyDesc: 'مرن — ادفع شهريًا، ألغِ في أي وقت',
@@ -1199,7 +1212,7 @@
                 welcomeMessage: 'Olá, somos a empresa RiTuI! 👋\n\nEste é o suporte técnico do GeoPark.\n\nPor favor, me conte qual problema você está enfrentando? Tentarei ajudá-lo o mais rápido possível.',
                 today: 'Hoje',
                 carDimensions: 'Dimensões do carro', width: 'Largura', length: 'Comprimento',
-                selectPoint: 'Ponto', searchDistance: 'Distância de pesquisa', disability: 'Deficiente',
+                selectPoint: 'Ponto', searchDistance: 'Distância de pesquisa', disability: 'Deficiente', barrier: 'Barreira',
                 paymentTitle: 'Pagamento de assinatura', paymentSubtitle: 'Escolha um plano',
                 freeTrial: 'Primeiro dia grátis!<br>Depois escolha um plano adequado.',
                 monthlyTariff: 'Assinatura mensal', monthlyDesc: 'Flexível — pague mensalmente, cancele a qualquer momento',
@@ -1227,7 +1240,7 @@
                 welcomeMessage: 'こんにちは、私たちはRiTuiI社です！ \n\nGeoParkのテクニカルサポートです。\n\nどのような問題に直面していますか？できるだけ早くお手伝いします。',
                 today: '今日',
                 carDimensions: '車の寸法', width: '幅', length: '長さ',
-                selectPoint: 'ポイント', searchDistance: '検索距離', disability: '障害者',
+                selectPoint: 'ポイント', searchDistance: '検索距離', disability: '障害者', barrier: 'ゲート',
                 paymentTitle: 'サブスクリプション支払い', paymentSubtitle: 'プランを選択',
                 freeTrial: '初日無料！<br>その後、適切なプランを選択してください。',
                 monthlyTariff: '月額サブスクリプション', monthlyDesc: '柔軟 — 毎月支払い、いつでもキャンセル',
@@ -1255,7 +1268,7 @@
                 welcomeMessage: 'Hallo, wir sind die Firma RiTuI! 👋\n\nDies ist der GeoPark Technical Support.\n\nBitte erzählen Sie mir, welches Problem Sie haben? Ich werde versuchen, Ihnen so schnell wie möglich zu helfen.',
                 today: 'Heute',
                 carDimensions: 'Autoabmessungen', width: 'Breite', length: 'Länge',
-                selectPoint: 'Punkt', searchDistance: 'Suchentfernung', disability: 'Behindert',
+                selectPoint: 'Punkt', searchDistance: 'Suchentfernung', disability: 'Behindert', barrier: 'Schranke',
                 paymentTitle: 'Abonnementzahlung', paymentSubtitle: 'Plan wählen',
                 freeTrial: 'Erster Tag kostenlos!<br>Wählen Sie dann einen passenden Plan.',
                 monthlyTariff: 'Monatsabonnement', monthlyDesc: 'Flexibel — monatliche Zahlung, jederzeit kündbar',
@@ -1283,7 +1296,7 @@
                 welcomeMessage: 'Bonjour, nous sommes la société RiTuI ! 👋\n\nC\'est le support technique GeoPark.\n\nDites-moi quel problème vous rencontrez ? J\'essaierai de vous aider le plus rapidement possible.',
                 today: 'Aujourd\'hui',
                 carDimensions: 'Dimensions de la voiture', width: 'Largeur', length: 'Longueur',
-                selectPoint: 'Point', searchDistance: 'Distance de recherche', disability: 'Handicapé',
+                selectPoint: 'Point', searchDistance: 'Distance de recherche', disability: 'Handicapé', barrier: 'Barrière',
                 paymentTitle: 'Paiement d\'abonnement', paymentSubtitle: 'Choisissez un forfait',
                 freeTrial: 'Premier jour gratuit !<br>Choisissez ensuite un forfait adapté.',
                 monthlyTariff: 'Abonnement mensuel', monthlyDesc: 'Flexible — payez mensuellement, annulez à tout moment',
@@ -1335,6 +1348,7 @@
             carWidth: 1.8, carLength: 4.0,
             searchDistance: 500,
             disability: false,
+            barrier: false,
             tariff: 'monthly',
             dropdownSearchQuery: ''
         };
@@ -1359,7 +1373,7 @@
             { code: 'fr', name: 'Français', flag: '🇫🇷' }
         ];
 
-        const mapState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0, minScale: 1, maxScale: 2.5 };
+        const mapState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0, minScale: 1, maxScale: 3 };
 
         function updateCarDimensions() {
             const wIdx = parseInt(document.getElementById('carWidth').value);
@@ -1373,6 +1387,11 @@
         function toggleDisability() {
             state.disability = !state.disability;
             document.getElementById('disabilityToggle').classList.toggle('active', state.disability);
+        }
+
+        function toggleBarrier() {
+            state.barrier = !state.barrier;
+            document.getElementById('barrierToggle').classList.toggle('active', state.barrier);
         }
 
         function togglePointSelector(e) {
@@ -1878,15 +1897,10 @@
             calculateMinScale();
         }
 
+        // Минимальный масштаб всегда 1 (картинка полностью заполняет контейнер через object-fit: cover)
         function calculateMinScale() {
-            const w = document.getElementById('mapWrapper');
-            const r = w.getBoundingClientRect();
-            const img = document.getElementById('mapImage');
-            const iw = img.naturalWidth || 360;
-            const ih = img.naturalHeight || 480;
-            const sa = iw / ih, wa = r.width / r.height;
-            mapState.minScale = Math.max(1, wa > sa ? r.height / ih : r.width / iw);
-            mapState.maxScale = mapState.minScale + 2;
+            mapState.minScale = 1;
+            mapState.maxScale = 3;
         }
 
         const mapWrapper = document.getElementById('mapWrapper');
@@ -1894,8 +1908,10 @@
 
         function updateMapTransform() { mapImage.style.transform = `translate(${mapState.x}px, ${mapState.y}px) scale(${mapState.scale})`; }
 
+        // ====== MOUSE ======
         mapWrapper.addEventListener('mousedown', e => {
             if (e.target.closest('.map-controls, .legend, .map-info')) return;
+            e.preventDefault(); // запрет нативного drag картинки и выделения
             mapState.isDragging = true;
             mapState.startX = e.clientX - mapState.x;
             mapState.startY = e.clientY - mapState.y;
@@ -1911,6 +1927,7 @@
 
         document.addEventListener('mouseup', () => { mapState.isDragging = false; mapWrapper.style.cursor = 'grab'; });
 
+        // ====== TOUCH ======
         let lastTouchDist = 0, lastTouchCenter = { x: 0, y: 0 };
 
         mapWrapper.addEventListener('touchstart', e => {
@@ -1924,7 +1941,7 @@
                 lastTouchDist = getTouchDist(e.touches);
                 lastTouchCenter = getTouchCenter(e.touches);
             }
-        });
+        }, { passive: false });
 
         mapWrapper.addEventListener('touchmove', e => {
             if (e.target.closest('.map-controls, .legend, .map-info')) return;
@@ -1940,24 +1957,25 @@
                 constrainPan(); updateMapTransform();
                 lastTouchDist = d; lastTouchCenter = c;
             }
-        });
+        }, { passive: false });
 
         mapWrapper.addEventListener('touchend', () => { mapState.isDragging = false; });
 
         function getTouchDist(ts) { const dx = ts[0].clientX - ts[1].clientX, dy = ts[0].clientY - ts[1].clientY; return Math.sqrt(dx*dx + dy*dy); }
         function getTouchCenter(ts) { return { x: (ts[0].clientX + ts[1].clientX) / 2, y: (ts[0].clientY + ts[1].clientY) / 2 }; }
 
-        mapWrapper.addEventListener('wheel', e => { e.preventDefault(); setScale(mapState.scale + (e.deltaY > 0 ? -0.1 : 0.1)); updateMapTransform(); });
+        mapWrapper.addEventListener('wheel', e => { e.preventDefault(); setScale(mapState.scale + (e.deltaY > 0 ? -0.1 : 0.1)); updateMapTransform(); }, { passive: false });
 
         function setScale(s) { mapState.scale = Math.max(mapState.minScale, Math.min(mapState.maxScale, s)); }
 
+        // Границы панорамирования считаем относительно размеров контейнера,
+        // т.к. картинка растянута на 100% (object-fit: cover) и масштабируется transform'ом.
         function constrainPan() {
             const r = document.getElementById('mapWrapper').getBoundingClientRect();
-            const img = document.getElementById('mapImage');
-            const iw = img.naturalWidth || 360;
-            const ih = img.naturalHeight || 480;
-            const sw = iw * mapState.scale, sh = ih * mapState.scale;
-            const mx = Math.max(0, (sw - r.width) / 2), my = Math.max(0, (sh - r.height) / 2);
+            const sw = r.width  * mapState.scale;
+            const sh = r.height * mapState.scale;
+            const mx = Math.max(0, (sw - r.width) / 2);
+            const my = Math.max(0, (sh - r.height) / 2);
             mapState.x = Math.max(-mx, Math.min(mx, mapState.x));
             mapState.y = Math.max(-my, Math.min(my, mapState.y));
         }
@@ -1969,6 +1987,14 @@
         // Ждём загрузки картинки, чтобы правильно рассчитать зум
         mapImage.addEventListener('load', () => {
             if (state.isMapVisible) { calculateMinScale(); resetMap(); }
+        });
+
+        // Глобальный «предохранитель» от нативного drag-and-drop картинок
+        document.addEventListener('dragstart', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+        document.addEventListener('drop', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
         });
 
         renderLanguages();
