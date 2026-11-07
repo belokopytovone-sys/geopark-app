@@ -103,6 +103,7 @@
             min-height: 100vh; overflow: hidden; transition: background 0.4s ease;
         }
 
+        /* ===== SPLASH ===== */
         .splash {
             position: fixed; inset: 0; z-index: 9999; background: #0a0a14;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -257,6 +258,7 @@
         .theme-preview.dark { background: #0f0f1a; }
         .theme-preview.light { background: #f5f6fa; }
 
+        /* ===== INSTRUCTION ===== */
         .instruction-content {
             flex: 1; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
@@ -270,6 +272,7 @@
         .instruction-icon svg { width: 28px; height: 28px; fill: var(--accent-light); }
         .instruction-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 240px; }
 
+        /* ===== CHAT ===== */
         .chat-messages {
             flex: 1; overflow-y: auto; padding: 16px;
             display: flex; flex-direction: column; gap: 10px;
@@ -324,6 +327,7 @@
         .chat-send:active { transform: scale(0.95); }
         .chat-send svg { width: 18px; height: 18px; fill: white; }
 
+        /* ===== CENTRAL PANEL ===== */
         .central-panel {
             flex: 1; display: flex; flex-direction: column;
             padding: 12px 16px; gap: 14px; overflow-y: auto; min-height: 0;
@@ -519,6 +523,7 @@
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
         }
 
+        /* ===== MAP ===== */
         .map-container { position: absolute; inset: 0; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; overflow: hidden; background: #0d1b2a; }
         .map-container.visible { opacity: 1; transform: scale(1); pointer-events: all; }
         .map-wrapper {
@@ -569,6 +574,7 @@
         .btn-show:hover .btn-ripple { animation: ripple 1.5s infinite; }
         @keyframes ripple { to { transform: translateX(100%); } }
 
+        /* ===== МОДАЛКА ОПЛАТЫ ===== */
         .payment-overlay {
             position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
@@ -717,6 +723,7 @@
     </style>
 </head>
 <body>
+    <!-- SPLASH -->
     <div class="splash" id="splash">
         <div class="splash-content">
             <div class="splash-glow"></div>
@@ -757,6 +764,7 @@
         </div>
 
         <div class="content">
+            <!-- ===== CENTRAL PANEL ===== -->
             <div class="points-view" id="pointsView">
                 <div class="central-panel">
                     <div class="panel-section">
@@ -837,6 +845,7 @@
                 </div>
             </div>
 
+            <!-- ===== INSTRUCTION VIEW ===== -->
             <div class="instruction-view" id="instructionView">
                 <div class="view-header">
                     <button class="btn-back" onclick="closeInstruction()">
@@ -852,6 +861,7 @@
                 </div>
             </div>
 
+            <!-- ===== SETTINGS VIEW ===== -->
             <div class="settings-view" id="settingsView">
                 <div class="view-header">
                     <button class="btn-back" onclick="closeSettings()">
@@ -880,6 +890,7 @@
                 </div>
             </div>
 
+            <!-- ===== CHAT VIEW ===== -->
             <div class="chat-view" id="chatView">
                 <div class="view-header">
                     <button class="btn-back" onclick="closeChat()">
@@ -896,6 +907,7 @@
                 </div>
             </div>
 
+            <!-- ===== MAP ===== -->
             <div class="map-container" id="mapContainer">
                 <div class="map-wrapper" id="mapWrapper">
                     <img id="mapImage" src="Карта-1.png" alt="Карта" draggable="false"
@@ -924,6 +936,7 @@
             </button>
         </div>
 
+        <!-- ===== PAYMENT OVERLAY ===== -->
         <div class="payment-overlay" id="paymentOverlay">
             <div class="payment-modal">
                 <div id="paymentFormContent">
@@ -939,7 +952,7 @@
 
                     <button class="free-trial-banner" type="button" onclick="startFreeTrial()">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                        <div class="free-trial-banner-text" data-i18n-html="freeTrial">Первая неделя — бесплатно!<br>Затем выберите подходящий тариф.</div>
+                        <div class="free-trial-banner-text" data-i18n-html="freeTrial">Первый день — бесплатно!<br>Затем выберите подходящий тариф.</div>
                     </button>
 
                     <div class="tariff-options" id="tariffOptions">
@@ -989,6 +1002,7 @@
             </div>
         </div>
 
+        <!-- ===== ADD/EDIT POINT MODAL ===== -->
         <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
             <div class="modal">
                 <div class="modal-title" id="modalTitle" data-i18n="newPoint">Новая точка</div>
@@ -1039,7 +1053,7 @@
                 carDimensions: 'Габариты автомобиля', width: 'Ширина', length: 'Длина',
                 selectPoint: 'Точка', searchDistance: 'Дистанция поиска', disability: 'Инвалид', barrier: 'Шлагбаум',
                 paymentTitle: 'Оплата подписки', paymentSubtitle: 'Выберите тариф',
-                freeTrial: 'Первая неделя — бесплатно!<br>Затем выберите подходящий тариф.',
+                freeTrial: 'Первый день — бесплатно!<br>Затем выберите подходящий тариф.',
                 monthlyTariff: 'Месячная подписка', monthlyDesc: 'Гибкость — оплата каждый месяц, отмена в любое время',
                 yearlyTariff: 'Годовая подписка', yearlyDesc: 'Экономия 25% — всего 149,99 ₽ в месяц',
                 bestValue: 'Выгодно', perMonth: 'в месяц', perYear: 'в год',
@@ -1067,7 +1081,7 @@
                 carDimensions: 'Car dimensions', width: 'Width', length: 'Length',
                 selectPoint: 'Point', searchDistance: 'Search distance', disability: 'Disabled', barrier: 'Barrier',
                 paymentTitle: 'Subscription payment', paymentSubtitle: 'Choose a plan',
-                freeTrial: 'First week — free!<br>Then choose a suitable plan.',
+                freeTrial: 'First day — free!<br>Then choose a suitable plan.',
                 monthlyTariff: 'Monthly subscription', monthlyDesc: 'Flexible — pay monthly, cancel anytime',
                 yearlyTariff: 'Yearly subscription', yearlyDesc: 'Save 25% — only 149.99 ₽ per month',
                 bestValue: 'Best value', perMonth: 'per month', perYear: 'per year',
@@ -1095,7 +1109,7 @@
                 carDimensions: 'Dimensiones del coche', width: 'Ancho', length: 'Largo',
                 selectPoint: 'Punto', searchDistance: 'Distancia de búsqueda', disability: 'Discapacitado', barrier: 'Barrera',
                 paymentTitle: 'Pago de suscripción', paymentSubtitle: 'Elige un plan',
-                freeTrial: '¡Primera semana gratis!<br>Luego elige un plan adecuado.',
+                freeTrial: '¡Primer día gratis!<br>Luego elige un plan adecuado.',
                 monthlyTariff: 'Suscripción mensual', monthlyDesc: 'Flexible — paga mensualmente, cancela cuando quieras',
                 yearlyTariff: 'Suscripción anual', yearlyDesc: 'Ahorra 25% — solo 149,99 ₽ al mes',
                 bestValue: 'Mejor valor', perMonth: 'al mes', perYear: 'al año',
@@ -1123,7 +1137,7 @@
                 carDimensions: '汽车尺寸', width: '宽度', length: '长度',
                 selectPoint: '地点', searchDistance: '搜索距离', disability: '残疾', barrier: '道闸',
                 paymentTitle: '订阅付款', paymentSubtitle: '选择套餐',
-                freeTrial: '第一周免费！<br>然后选择合适的套餐。',
+                freeTrial: '第一天免费！<br>然后选择合适的套餐。',
                 monthlyTariff: '月度订阅', monthlyDesc: '灵活 — 按月付款，随时取消',
                 yearlyTariff: '年度订阅', yearlyDesc: '节省25% — 每月仅149.99 ₽',
                 bestValue: '最划算', perMonth: '每月', perYear: '每年',
@@ -1151,7 +1165,7 @@
                 carDimensions: 'कार आयाम', width: 'चौड़ाई', length: 'लंबाई',
                 selectPoint: 'बिंदु', searchDistance: 'खोज दूरी', disability: 'विकलांग', barrier: 'अवरोध',
                 paymentTitle: 'सदस्यता भुगतान', paymentSubtitle: 'योजना चुनें',
-                freeTrial: 'पहला सप्ताह मुफ़्त!<br>फिर उपयुक्त योजना चुनें।',
+                freeTrial: 'पहला दिन मुफ्त!<br>फिर उपयुक्त योजना चुनें।',
                 monthlyTariff: 'मासिक सदस्यता', monthlyDesc: 'लचीला — मासिक भुगतान करें, कभी भी रद्द करें',
                 yearlyTariff: 'वार्षिक सदस्यता', yearlyDesc: '25% बचाएं — प्रति माह केवल 149.99 ₽',
                 bestValue: 'सर्वोत्तम मूल्य', perMonth: 'प्रति माह', perYear: 'प्रति वर्ष',
@@ -1179,7 +1193,7 @@
                 carDimensions: 'أبعاد السيارة', width: 'العرض', length: 'الطول',
                 selectPoint: 'نقطة', searchDistance: 'مسافة البحث', disability: 'معاق', barrier: 'حاجز',
                 paymentTitle: 'دفع الاشتراك', paymentSubtitle: 'اختر خطة',
-                freeTrial: 'الأسبوع الأول مجاني!<br>ثم اختر الخطة المناسبة.',
+                freeTrial: 'اليوم الأول مجاني!<br>ثم اختر الخطة المناسبة.',
                 monthlyTariff: 'اشتراك شهري', monthlyDesc: 'مرن — ادفع شهريًا، ألغِ في أي وقت',
                 yearlyTariff: 'اشتراك سنوي', yearlyDesc: 'وفر 25% — فقط 149.99 ₽ شهريًا',
                 bestValue: 'أفضل قيمة', perMonth: 'شهريًا', perYear: 'سنويًا',
@@ -1207,7 +1221,7 @@
                 carDimensions: 'Dimensões do carro', width: 'Largura', length: 'Comprimento',
                 selectPoint: 'Ponto', searchDistance: 'Distância de pesquisa', disability: 'Deficiente', barrier: 'Barreira',
                 paymentTitle: 'Pagamento de assinatura', paymentSubtitle: 'Escolha um plano',
-                freeTrial: 'Primeira semana grátis!<br>Depois escolha um plano adequado.',
+                freeTrial: 'Primeiro dia grátis!<br>Depois escolha um plano adequado.',
                 monthlyTariff: 'Assinatura mensal', monthlyDesc: 'Flexível — pague mensalmente, cancele a qualquer momento',
                 yearlyTariff: 'Assinatura anual', yearlyDesc: 'Economize 25% — apenas 149,99 ₽ por mês',
                 bestValue: 'Melhor valor', perMonth: 'por mês', perYear: 'por ano',
@@ -1235,7 +1249,7 @@
                 carDimensions: '車の寸法', width: '幅', length: '長さ',
                 selectPoint: 'ポイント', searchDistance: '検索距離', disability: '障害者', barrier: 'ゲート',
                 paymentTitle: 'サブスクリプション支払い', paymentSubtitle: 'プランを選択',
-                freeTrial: '初週無料！<br>その後、適切なプランを選択してください。',
+                freeTrial: '初日無料！<br>その後、適切なプランを選択してください。',
                 monthlyTariff: '月額サブスクリプション', monthlyDesc: '柔軟 — 毎月支払い、いつでもキャンセル',
                 yearlyTariff: '年額サブスクリプション', yearlyDesc: '25%節約 — 月額わずか149.99₽',
                 bestValue: 'お得', perMonth: '月額', perYear: '年額',
@@ -1263,7 +1277,7 @@
                 carDimensions: 'Autoabmessungen', width: 'Breite', length: 'Länge',
                 selectPoint: 'Punkt', searchDistance: 'Suchentfernung', disability: 'Behindert', barrier: 'Schranke',
                 paymentTitle: 'Abonnementzahlung', paymentSubtitle: 'Plan wählen',
-                freeTrial: 'Erste Woche kostenlos!<br>Wählen Sie dann einen passenden Plan.',
+                freeTrial: 'Erster Tag kostenlos!<br>Wählen Sie dann einen passenden Plan.',
                 monthlyTariff: 'Monatsabonnement', monthlyDesc: 'Flexibel — monatliche Zahlung, jederzeit kündbar',
                 yearlyTariff: 'Jahresabonnement', yearlyDesc: 'Sparen Sie 25% — nur 149,99 ₽ pro Monat',
                 bestValue: 'Bestes Angebot', perMonth: 'pro Monat', perYear: 'pro Jahr',
@@ -1291,7 +1305,7 @@
                 carDimensions: 'Dimensions de la voiture', width: 'Largeur', length: 'Longueur',
                 selectPoint: 'Point', searchDistance: 'Distance de recherche', disability: 'Handicapé', barrier: 'Barrière',
                 paymentTitle: 'Paiement d\'abonnement', paymentSubtitle: 'Choisissez un forfait',
-                freeTrial: 'Première semaine gratuite !<br>Choisissez ensuite un forfait adapté.',
+                freeTrial: 'Premier jour gratuit !<br>Choisissez ensuite un forfait adapté.',
                 monthlyTariff: 'Abonnement mensuel', monthlyDesc: 'Flexible — payez mensuellement, annulez à tout moment',
                 yearlyTariff: 'Abonnement annuel', yearlyDesc: 'Économisez 25% — seulement 149,99 ₽ par mois',
                 bestValue: 'Meilleur rapport qualité-prix', perMonth: 'par mois', perYear: 'par an',
@@ -1664,6 +1678,7 @@
             }, 1200);
         }
 
+        // Пробный период — сразу активирует подписку без ввода карты
         function startFreeTrial() {
             state.isPaid = true;
             document.getElementById('paymentFormContent').style.display = 'none';
@@ -1781,6 +1796,8 @@
             container.appendChild(divider);
 
             state.chatMessages.forEach(msg => {
+                // Приветственное сообщение всегда берём из актуальных переводов,
+                // чтобы оно менялось при смене языка
                 const text = msg.id === 'welcome' ? t('welcomeMessage') : msg.text;
                 const bubble = document.createElement('div');
                 bubble.className = 'chat-bubble ' + msg.role;
@@ -1907,6 +1924,7 @@
 
         function updateMapTransform() { mapImage.style.transform = `translate(${mapState.x}px, ${mapState.y}px) scale(${mapState.scale})`; }
 
+        // ====== MOUSE ======
         mapWrapper.addEventListener('mousedown', e => {
             if (e.target.closest('.map-controls, .legend, .map-info')) return;
             e.preventDefault();
@@ -1925,6 +1943,7 @@
 
         document.addEventListener('mouseup', () => { mapState.isDragging = false; mapWrapper.style.cursor = 'grab'; });
 
+        // ====== TOUCH ======
         let lastTouchDist = 0, lastTouchCenter = { x: 0, y: 0 };
 
         mapWrapper.addEventListener('touchstart', e => {
