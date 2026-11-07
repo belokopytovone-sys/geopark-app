@@ -248,6 +248,7 @@
         .settings-option.active { background: var(--bg-settings-item-active); border-color: rgba(99, 102, 241, 0.3); color: var(--accent-lighter); font-weight: 600; }
 
         .settings-option-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .settings-option-icon img { width: 20px; height: auto; border-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.2); display: block; }
         .settings-option-label { flex: 1; }
         .settings-option-check { width: 16px; height: 16px; opacity: 0; transition: opacity 0.2s ease; }
         .settings-option.active .settings-option-check { opacity: 1; }
@@ -522,7 +523,7 @@
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
         }
 
-        /* ===== MAP (ОБНОВЛЕНО ПОД PNG) ===== */
+        /* ===== MAP ===== */
         .map-container { position: absolute; inset: 0; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; overflow: hidden; background: #0d1b2a; }
         .map-container.visible { opacity: 1; transform: scale(1); pointer-events: all; }
         .map-wrapper {
@@ -533,10 +534,9 @@
         }
         .map-wrapper:active { cursor: grabbing; }
 
-        /* Новый стиль для картинки */
         .map-wrapper #mapImage {
             width: 100%; height: 100%;
-            object-fit: cover; /* Картинка заполняет всё пространство */
+            object-fit: cover;
             transform-origin: center center;
             transition: transform 0.1s ease-out;
             user-select: none;
@@ -611,7 +611,15 @@
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.06));
             border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px;
             padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+            width: 100%; text-align: left; cursor: pointer;
+            font-family: 'Inter', sans-serif; color: inherit;
+            transition: all 0.2s ease;
         }
+        .free-trial-banner:hover {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.22), rgba(34, 197, 94, 0.12));
+            border-color: rgba(34, 197, 94, 0.55);
+        }
+        .free-trial-banner:active { transform: scale(0.985); }
         .free-trial-banner svg { width: 20px; height: 20px; fill: #4ade80; flex-shrink: 0; }
         .free-trial-banner-text { font-size: 12px; color: #4ade80; font-weight: 600; line-height: 1.4; }
 
@@ -899,10 +907,9 @@
                 </div>
             </div>
 
-            <!-- ===== MAP (ОБНОВЛЕНО ПОД PNG) ===== -->
+            <!-- ===== MAP ===== -->
             <div class="map-container" id="mapContainer">
                 <div class="map-wrapper" id="mapWrapper">
-                    <!-- Твоя картинка -->
                     <img id="mapImage" src="Карта-1.png" alt="Карта" draggable="false"
                          ondragstart="return false;" onmousedown="return false;">
                 </div>
@@ -943,10 +950,10 @@
                         </button>
                     </div>
 
-                    <div class="free-trial-banner">
+                    <button class="free-trial-banner" type="button" onclick="startFreeTrial()">
                         <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                         <div class="free-trial-banner-text" data-i18n-html="freeTrial">Первый день — бесплатно!<br>Затем выберите подходящий тариф.</div>
-                    </div>
+                    </button>
 
                     <div class="tariff-options" id="tariffOptions">
                         <div class="tariff-card selected" data-tariff="monthly" onclick="selectTariff('monthly')">
@@ -1361,16 +1368,16 @@
         const lengthOptions = [3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2, 4.4, 4.6, 4.8, 5.0, 5.2, 5.4, 5.6];
 
         const languages = [
-            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-            { code: 'en', name: 'English', flag: '🇬🇧' },
-            { code: 'es', name: 'Español', flag: '🇸' },
-            { code: 'zh', name: '中文', flag: '🇳' },
-            { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-            { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-            { code: 'pt', name: 'Português', flag: '🇵🇹' },
-            { code: 'ja', name: '日本語', flag: '🇯🇵' },
-            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-            { code: 'fr', name: 'Français', flag: '🇫🇷' }
+            { code: 'ru', name: 'Русский', flagCode: 'ru' },
+            { code: 'en', name: 'English', flagCode: 'gb' },
+            { code: 'es', name: 'Español', flagCode: 'es' },
+            { code: 'zh', name: '中文', flagCode: 'cn' },
+            { code: 'hi', name: 'हिन्दी', flagCode: 'in' },
+            { code: 'ar', name: 'العربية', flagCode: 'sa' },
+            { code: 'pt', name: 'Português', flagCode: 'pt' },
+            { code: 'ja', name: '日本語', flagCode: 'jp' },
+            { code: 'de', name: 'Deutsch', flagCode: 'de' },
+            { code: 'fr', name: 'Français', flagCode: 'fr' }
         ];
 
         const mapState = { scale: 1, x: 0, y: 0, isDragging: false, startX: 0, startY: 0, minScale: 1, maxScale: 3 };
@@ -1671,6 +1678,13 @@
             }, 1200);
         }
 
+        // Пробный период — сразу активирует подписку без ввода карты
+        function startFreeTrial() {
+            state.isPaid = true;
+            document.getElementById('paymentFormContent').style.display = 'none';
+            document.getElementById('paymentSuccess').classList.add('visible');
+        }
+
         function continueAfterPayment() {
             closePayment();
             toggleMap(true);
@@ -1714,7 +1728,7 @@
                 opt.dataset.lang = lang.code;
                 opt.onclick = () => setLanguage(lang.code);
                 opt.innerHTML = `
-                    <div class="settings-option-icon" style="font-size:16px">${lang.flag}</div>
+                    <div class="settings-option-icon"><img src="https://flagcdn.com/w40/${lang.flagCode}.png" alt="${lang.name}" loading="lazy" onerror="this.style.visibility='hidden'"></div>
                     <div class="settings-option-label">${lang.name}</div>
                     <div class="settings-option-check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
                 `;
@@ -1782,9 +1796,12 @@
             container.appendChild(divider);
 
             state.chatMessages.forEach(msg => {
+                // Приветственное сообщение всегда берём из актуальных переводов,
+                // чтобы оно менялось при смене языка
+                const text = msg.id === 'welcome' ? t('welcomeMessage') : msg.text;
                 const bubble = document.createElement('div');
                 bubble.className = 'chat-bubble ' + msg.role;
-                bubble.innerHTML = escapeHtml(msg.text).replace(/\n/g, '<br>') +
+                bubble.innerHTML = escapeHtml(text).replace(/\n/g, '<br>') +
                     `<span class="chat-bubble-time">${formatTime(msg.timestamp)}</span>`;
                 container.appendChild(bubble);
             });
@@ -1897,7 +1914,6 @@
             calculateMinScale();
         }
 
-        // Минимальный масштаб всегда 1 (картинка полностью заполняет контейнер через object-fit: cover)
         function calculateMinScale() {
             mapState.minScale = 1;
             mapState.maxScale = 3;
@@ -1911,7 +1927,7 @@
         // ====== MOUSE ======
         mapWrapper.addEventListener('mousedown', e => {
             if (e.target.closest('.map-controls, .legend, .map-info')) return;
-            e.preventDefault(); // запрет нативного drag картинки и выделения
+            e.preventDefault();
             mapState.isDragging = true;
             mapState.startX = e.clientX - mapState.x;
             mapState.startY = e.clientY - mapState.y;
@@ -1968,8 +1984,6 @@
 
         function setScale(s) { mapState.scale = Math.max(mapState.minScale, Math.min(mapState.maxScale, s)); }
 
-        // Границы панорамирования считаем относительно размеров контейнера,
-        // т.к. картинка растянута на 100% (object-fit: cover) и масштабируется transform'ом.
         function constrainPan() {
             const r = document.getElementById('mapWrapper').getBoundingClientRect();
             const sw = r.width  * mapState.scale;
@@ -1984,12 +1998,10 @@
         function zoomOut() { setScale(mapState.scale - 0.2); updateMapTransform(); }
         function resetMap() { calculateMinScale(); mapState.scale = mapState.minScale; mapState.x = 0; mapState.y = 0; updateMapTransform(); }
 
-        // Ждём загрузки картинки, чтобы правильно рассчитать зум
         mapImage.addEventListener('load', () => {
             if (state.isMapVisible) { calculateMinScale(); resetMap(); }
         });
 
-        // Глобальный «предохранитель» от нативного drag-and-drop картинок
         document.addEventListener('dragstart', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
@@ -2010,4 +2022,4 @@
         });
     </script>
 </body>
-</html>
+                        </html>
