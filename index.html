@@ -1892,4 +1892,115 @@
                     tt.textContent = t('currentLocation');
                 }
             }
-            const distLabel = state.searchDistance === 100
+            const distLabel = state.searchDistance === 1000 ? '1 км' : state.searchDistance + ' м';
+            s.textContent = `${t('zone')}: ${distLabel}`;
+            calculateMinScale();
+        }
+
+        function calculateMinScale() {
+            mapState.minScale = 1;
+            mapState.maxScale = 3;
+        }
+
+        const mapWrapper = document.getElementById('mapWrapper');
+        const mapImage = document.getElementById('mapImage');
+
+        function updateMapTransform() { mapImage.style.transform = `translate(${mapState.x}px, ${mapState.y}px) scale(${mapState.scale})`; }
+
+        mapWrapper.addEventListener('mousedown', e => {
+            if (e.target.closest('.map-controls, .legend, .map-info')) return;
+            e.preventDefault();
+            mapState.isDragging = true;
+            mapState.startX = e.clientX - mapState.x;
+            mapState.startY = e.clientY - mapState.y;
+            mapWrapper.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', e => {
+            if (!mapState.isDragging) return;
+            mapState.x = e.clientX - mapState.startX;
+            mapState.y = e.clientY - mapState.startY;
+            constrainPan(); updateMapTransform();
+        });
+
+        document.addEventListener('mouseup', () => { mapState.isDragging = false; mapWrapper.style.cursor = 'grab'; });
+
+        let lastTouchDist = 0, lastTouchCenter = { x: 0, y: 0 };
+
+        mapWrapper.addEventListener('touchstart', e => {
+            if (e.target.closest('.map-controls, .legend, .map-info')) return;
+            if (e.touches.length === 1) {
+                mapState.isDragging = true;
+                mapState.startX = e.touches[0].clientX - mapState.x;
+                mapState.startY = e.touches[0].clientY - mapState.y;
+            } else if (e.touches.length === 2) {
+                mapState.isDragging = false;
+                lastTouchDist = getTouchDist(e.touches);
+                lastTouchCenter = getTouchCenter(e.touches);
+            }
+        }, { passive: false });
+
+        mapWrapper.addEventListener('touchmove', e => {
+            if (e.target.closest('.map-controls, .legend, .map-info')) return;
+            e.preventDefault();
+            if (e.touches.length === 1 && mapState.isDragging) {
+                mapState.x = e.touches[0].clientX - mapState.startX;
+                mapState.y = e.touches[0].clientY - mapState.startY;
+                constrainPan(); updateMapTransform();
+            } else if (e.touches.length === 2) {
+                const d = getTouchDist(e.touches), c = getTouchCenter(e.touches);
+                setScale(mapState.scale + (d - lastTouchDist) * 0.005);
+                mapState.x += c.x - lastTouchCenter.x; mapState.y += c.y - lastTouchCenter.y;
+                constrainPan(); updateMapTransform();
+                lastTouchDist = d; lastTouchCenter = c;
+            }
+        }, { passive: false });
+
+        mapWrapper.addEventListener('touchend', () => { mapState.isDragging = false; });
+
+        function getTouchDist(ts) { const dx = ts[0].clientX - ts[1].clientX, dy = ts[0].clientY - ts[1].clientY; return Math.sqrt(dx*dx + dy*dy); }
+        function getTouchCenter(ts) { return { x: (ts[0].clientX + ts[1].clientX) / 2, y: (ts[0].clientY + ts[1].clientY) / 2 }; }
+
+        mapWrapper.addEventListener('wheel', e => { e.preventDefault(); setScale(mapState.scale + (e.deltaY > 0 ? -0.1 : 0.1)); updateMapTransform(); }, { passive: false });
+
+        function setScale(s) { mapState.scale = Math.max(mapState.minScale, Math.min(mapState.maxScale, s)); }
+
+        function constrainPan() {
+            const r = document.getElementById('mapWrapper').getBoundingClientRect();
+            const sw = r.width  * mapState.scale;
+            const sh = r.height * mapState.scale;
+            const mx = Math.max(0, (sw - r.width) / 2);
+            const my = Math.max(0, (sh - r.height) / 2);
+            mapState.x = Math.max(-mx, Math.min(mx, mapState.x));
+            mapState.y = Math.max(-my, Math.min(my, mapState.y));
+        }
+
+        function zoomIn() { setScale(mapState.scale + 0.2); updateMapTransform(); }
+        function zoomOut() { setScale(mapState.scale - 0.2); updateMapTransform(); }
+        function resetMap() { calculateMinScale(); mapState.scale = mapState.minScale; mapState.x = 0; mapState.y = 0; updateMapTransform(); }
+
+        mapImage.addEventListener('load', () => {
+            if (state.isMapVisible) { calculateMinScale(); resetMap(); }
+        });
+
+        document.addEventListener('dragstart', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+        document.addEventListener('drop', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+
+        renderLanguages();
+        renderDropdownPoints();
+        renderSelectedPoint();
+        updateDistanceButtons();
+        updateCarDimensions();
+        updatePayButton();
+        applyLanguage();
+
+        window.addEventListener('resize', () => {
+            if (state.isMapVisible) { calculateMinScale(); constrainPan(); updateMapTransform(); }
+        });
+    </script>
+</body>
+</html>
